@@ -1,9 +1,13 @@
 # polyaudit
 
-**Polymarket's public profit figures are reported before trading fees.** A wallet
-showing six figures of "profit" can be losing money on every trade and staying
-alive on the volume-tier rebate. This tool reconstructs what a wallet actually
-made.
+### Can I copy this trader? — the one question the leaderboards do not answer.
+
+A wallet can show six figures of public "profit", lose money on every trade,
+and stay alive on a volume rebate you will never qualify for. Fee trackers
+show the toll; reward pages show the refund; nobody nets them into a single
+number and says which side of the line the wallet is on.
+
+This does. One command, no account.
 
 ```
 $ python audit.py 0xf418d3a1a941292f9c8707d62a14980c5beb95a3
@@ -94,14 +98,23 @@ retried on failure — a timeout must never be mistaken for the end of a history
   report says the period is partial.
 - This measures what happened. It does not predict, and it is not advice.
 
-## Why it exists
+## What is already covered elsewhere, and what is not
 
-Threads with hundreds of thousands of views point at wallets and quote the
-public profit as if it were money earned. Of nine such wallets audited with
-this tool, four were losing money on their trades and surviving on rebates —
-including two described as top performers, and one whose author sells the bot.
+That the public figure ignores fees is known: several trackers already subtract
+them. What none of them do is net the **rebate** back in. PolyScalping says so
+in its own disclaimer — it publishes gross fees and leaves the offsetting
+rewards on a separate page, to be cross-referenced by hand. The consequence is
+that a wallet paying $500k in fees while collecting $600k in rebates looks
+identical to one that is simply bleeding.
 
-The arithmetic was always public. Nobody was doing it.
+That single number is the difference between a business you can copy and one
+you cannot, because the rebate scales with volume you will never have. This
+tool reports it, states when the trading result is negative without the
+subsidy, and refuses to answer when the underlying data cannot support one.
+
+Of nine wallets audited this way — several of them cited in threads with
+hundreds of thousands of views — four were losing money on their trades and
+surviving on rebates. One of them sells its bot for $8,000.
 
 ## License
 
