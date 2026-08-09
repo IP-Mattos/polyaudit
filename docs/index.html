@@ -73,12 +73,19 @@
         a wallet doing hundreds of thousands of fills, that gap dwarfs the trading
         result. Maker fills pay <strong>zero</strong> — verified per fill on real
         accounts, not inferred from documentation.</p>
-      <p>On the other side of the ledger sits the taker rebate program: automatic
-        daily refunds by 30-day volume tier, from a few percent at the bottom to
-        roughly half the fee at the top. Fee trackers show the toll; reward pages
-        show the refund; nobody nets them into a single number. So a wallet paying
-        $500k in fees while collecting $600k in rebates looks identical to one
-        that is simply bleeding.</p>
+      <p>On the other side of the ledger sit two separate rebate programs, both
+        live and both officially documented: the
+        <a href="https://docs.polymarket.com/programs/taker-rebates" rel="external">taker
+        rebate</a> — automatic daily refunds by 30-day weighted-volume tier, from
+        3% at Bronze to 50% at Obsidian — and the
+        <a href="https://docs.polymarket.com/market-makers/maker-rebates" rel="external">maker
+        rebate</a>, a share of the taker-fee pool proportional to the liquidity you
+        actually got filled. The activity feed labels them as distinct event types
+        (<code>TAKER_REBATE</code> / <code>MAKER_REBATE</code>), and the audit
+        counts both. Fee trackers show the toll; reward pages show the refund;
+        nobody nets them into a single number. So a wallet paying $500k in fees
+        while collecting $600k in rebates looks identical to one that is simply
+        bleeding.</p>
 
       <div class="identity">
         official&nbsp;&nbsp;≈&nbsp;&nbsp;real&nbsp;+&nbsp;fees&nbsp;−&nbsp;rebates
