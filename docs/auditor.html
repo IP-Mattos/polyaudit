@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#10151a">
+<meta name="description" content="Audit any Polymarket wallet in your browser: real PnL with fees and rebates netted, maker/taker split, anti-luck shape, and a reconciliation guard that refuses to publish numbers that do not tie out.">
+<title>polyaudit — wallet auditor</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-head">
+  <div class="wrap site-head-in">
+    <a class="brand" href="index.html"><span class="tick">$</span> polyaudit</a>
+    <nav class="site-nav" aria-label="Site">
+      <a href="index.html">Research</a>
+      <a href="auditor.html" aria-current="page">Auditor</a>
+      <!-- TODO: replace # with the public repo URL when pushed -->
+      <a href="#" rel="external">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero wrap">
+    <p class="eyebrow">Live audit — runs entirely in your browser</p>
+    <h1>Audit a wallet</h1>
+    <p class="lede">Paste any Polymarket wallet address. The auditor walks its
+      full public activity backwards, re-prices every fill, nets
+      <strong>fees and rebates</strong> into one real PnL, and checks the result
+      against the identity <code>official ≈ real + fees − rebates</code>. If the
+      books do not tie out within 5%, it says <strong>NOT RELIABLE</strong>
+      instead of printing a tidy wrong answer.</p>
+
+    <div class="aud-panel">
+      <form class="aud-form" id="audForm" novalidate>
+        <div class="field grow">
+          <label for="addr">Wallet address</label>
+          <input id="addr" name="addr" type="text" inputmode="text" autocomplete="off"
+                 spellcheck="false" placeholder="0x…40 hex characters"
+                 aria-describedby="addrHelp">
+        </div>
+        <div class="field">
+          <label for="cap">Max events</label>
+          <select id="cap" name="cap">
+            <option value="50000">50k — quick look</option>
+            <option value="200000" selected>200k — default</option>
+            <option value="600000">600k — full engine cap</option>
+          </select>
+        </div>
+        <button type="submit" class="btn" id="runBtn">Run audit</button>
+        <button type="button" class="btn-ghost" id="cancelBtn" disabled>Cancel</button>
+      </form>
+
+      <p class="aud-note" id="addrHelp">
+        Try the exhibit wallet:
+        <a href="#" id="exampleLink">0xf418d3a1a941292f9c8707d62a14980c5beb95a3</a>
+        — the one that sells its bot for $8,000.
+      </p>
+
+      <p class="aud-error" id="audError" role="alert" hidden></p>
+
+      <div class="aud-progress" id="audProgress" aria-live="polite">
+        <span id="progressText"></span><span class="cursor" aria-hidden="true"></span>
+      </div>
+    </div>
+
+    <figure class="term report" id="report" aria-live="polite">
+      <figcaption class="term-bar">
+        <span id="reportTitle">audit report</span>
+        <span id="reportMeta"></span>
+      </figcaption>
+      <div class="report-body" id="reportBody"></div>
+      <div class="report-actions">
+        <button type="button" class="btn-ghost" id="downloadBtn">Download JSON</button>
+      </div>
+    </figure>
+
+    <p class="aud-note">
+      Large wallets (hundreds of thousands of events) take several minutes:
+      requests are spaced ~350ms and walked 500 events at a time, out of respect
+      for a public API. Everything runs in your browser — no server, no account,
+      no API key; every request is a plain GET to Polymarket's public endpoints.
+      Cancelling reports the partial period honestly, flagged as partial.
+    </p>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <p class="disclaimer">This is a measurement of what happened, not advice.
+      Some wallets cannot be reconstructed from public activity alone; when the
+      reconciliation guard fails, the correct output is to refuse.</p>
+    <nav aria-label="Footer">
+      <a href="index.html">Research</a>
+      <a href="auditor.html">Auditor</a>
+      <!-- TODO: replace # with the public repo URL when pushed -->
+      <a href="#" rel="external">GitHub</a>
+      <span>MIT License</span>
+    </nav>
+  </div>
+</footer>
+
+<script src="audit.js"></script>
+</body>
+</html>
