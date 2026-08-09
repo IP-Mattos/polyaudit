@@ -39,7 +39,7 @@
     <figure class="term reveal">
       <figcaption class="term-bar">
         <span>audit 0xf418d3a1a941292f9c8707d62a14980c5beb95a3</span>
-        <span>exhibit 00 — the $8,000 bot</span>
+        <span>exhibit 00 — the $8,000 bot · window 2026-05-07 → 08-03</span>
       </figcaption>
       <div class="term-body">
         <div class="tl"><span class="tl-k">profile pnl (public)</span><span class="tl-v amber">+$101,914.56</span><span class="tl-n">pre-fee, pre-rebate</span></div>
@@ -49,7 +49,13 @@
         <div class="tl"><span class="tl-k">…without the rebate</span><span class="tl-v red">−$4,282.49</span><span class="tl-n">the trading itself loses</span></div>
       </div>
       <p class="term-foot">This wallet's owner sells the bot behind it for $8,000.
-        Every fill was re-priced from the raw activity feed; the arithmetic above is the whole argument.</p>
+        Every fill was re-priced from the raw activity feed; the arithmetic above is the whole argument.
+        An audit is a dated photograph, not a permanent truth: a
+        <a href="https://github.com/IP-Mattos/polyaudit/blob/master/examples/takerner_2026-08-09.json" rel="external">re-run
+        six days later</a> (reconciliation residual $2.6k, 213 zero-valued redemptions) put the
+        without-rebate result at ≈+$4.2k — a sign flip that sits <em>inside</em> that run's own
+        residual. What holds in both windows: the trading result is roughly zero, and the rebate is
+        ~88% of net income. Compare periods, not totals.</p>
     </figure>
 
     <ul class="case-index">
@@ -123,8 +129,11 @@
             <li><span>fees / rebates</span><span class="v">$106,216 / $27,782</span></li>
             <li><span>trading without the subsidy</span><span class="v red">≈ −$4,283</span></li>
           </ul>
-          <p>The entire profit is the volume rebate. Copy the trades without the
-            tier and you inherit only the losses. Sells the bot for $8,000.</p>
+          <p>In the May 7 – Aug 3 window the entire profit was the volume rebate;
+            a re-run six days later showed trading itself marginally positive —
+            within that run's reconciliation residual. Either way the subsidy is
+            ~88% of net income: copy the trades without the tier and you trade a
+            coin flip while paying full toll. Sells the bot for $8,000.</p>
           <p class="aside">Same family: doggystyie — profile +$214.8k, net −$312 in
             the audited window. Agile-Spacing — profile +$533k lifetime; audited at a
             Diamond-tier rebate of ≈$3,116/day against ≈$3,446/day of fees.</p>

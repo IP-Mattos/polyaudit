@@ -28,6 +28,13 @@ $ python audit.py 0xf418d3a1a941292f9c8707d62a14980c5beb95a3
 
 That wallet advertises its bot for sale at $8,000.
 
+That report is the 2026-05-07 → 08-03 window, measured with a $19 reconciliation
+residual. A re-run six days later (`examples/takerner_2026-08-09.json`) put the
+without-rebate result at ≈+$4.2k — a sign flip that sits inside that run's own
+$2.6k residual. An audit is a dated photograph, not a permanent truth: the
+stable finding across both windows is a trading result of roughly zero with the
+rebate at ~88% of net income.
+
 ## What the leaderboard does not tell you
 
 | field | what it looks like | what it is |
@@ -78,6 +85,14 @@ million-dollar success. Its redemption events come back empty from the public
 API, so its real result cannot be reconstructed from activity alone — and
 saying so is the correct output.
 
+One thing the identity cannot check, by construction: the rebate line. Because
+`real_pnl` already contains rebates, they cancel out of `real + fees − rebates`;
+the guard tests the reconstruction of cash flows, open value and fees against
+the venue's figure — not the rebate amount. Rebates are not inferred, though:
+they are read from explicitly labeled events (`TAKER_REBATE`, `MAKER_REBATE`),
+and for the exhibit wallet they match an independent on-chain reconstruction
+from Polygon transfer events to within 0.1%.
+
 ## Usage
 
 ```bash
@@ -109,6 +124,19 @@ wallet (200k+ events) takes several minutes at the built-in request spacing.
   to report rather than guessing.
 - History is walked backwards until exhausted; if the ceiling is reached the
   report says the period is partial.
+- Passing the 5% guard bounds the books; it does not settle every derived
+  number. When a quantity of interest — say, a without-rebate result of a few
+  thousand dollars — is the same order as the run's reconciliation residual,
+  its sign is not resolved, and the report should be read that way.
+- Per-day, half-history and per-market shapes are cash-flow based: a position
+  bought today and redeemed in two weeks debits one day and credits another.
+  They describe the shape of the money, not time-weighted returns.
+- REAL PNL includes the open book at the API's current valuation — for wallets
+  with large open positions it is marked-to-market, not realized cash.
+- Everything labeled `REBATE` plus plain `REWARD` is counted as subsidy income
+  in a single bucket. The API distinguishes more types (`TAKER_REBATE`,
+  `MAKER_REBATE`, `REWARD`, `REFERRAL_REWARD`…); the bucket answers "does the
+  trading pay without subsidies", not "which subsidy".
 - This measures what happened. It does not predict, and it is not advice.
 
 ## What is already covered elsewhere, and what is not
