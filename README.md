@@ -88,9 +88,22 @@ python audit.py 0xADDRESS --json   # machine-readable
 Only the standard library. No key, no account. Requests are spaced 350ms and
 retried on failure — a timeout must never be mistaken for the end of a history.
 
+### Reproducing an audit
+
+The cutoff of an audit is the moment you run it: history is walked backwards
+from now until exhausted, so re-running the same command later covers a longer
+period — compare periods, not totals. `examples/` holds dated `--json` outputs
+committed as-is, each reproducible with the single command above. A large
+wallet (200k+ events) takes several minutes at the built-in request spacing.
+
 ## Limits, stated plainly
 
 - Large wallets (hundreds of thousands of events) take several minutes.
+- The maker/taker split is inferred from the per-fill fee. Polymarket rounds
+  fees to five decimals, so a dust-sized taker fill near an extreme price can
+  round to a zero fee and be counted as maker. This can nudge the maker
+  percentage slightly; the dollar totals are unaffected, because they are built
+  from actual cash flows, not from the classification.
 - Some wallets return zero-valued redemptions from the public API. Their real
   result needs on-chain reconstruction; this tool detects the case and refuses
   to report rather than guessing.
