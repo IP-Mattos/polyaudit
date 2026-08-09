@@ -387,6 +387,12 @@ function verdict(a) {
       'Without the rebate the result is smaller than this run’s ' +
       'reconciliation residual: sign UNRESOLVED. The rebate dominates the ' +
       'income; the trading shows no demonstrated edge.' });
+  } else if (a.without_rebate_sign === 'POSITIVE' && a.rebates > 0 &&
+             a.REAL_PNL > 0 && a.rebates > 0.5 * a.REAL_PNL) {
+    out.push({ cls: 'warn', text:
+      `The rebate is the dominant income source (${Math.round(100 * a.rebates / a.REAL_PNL)}% ` +
+      'of net): the trading adds little, and these economics do not replicate ' +
+      'without that tier.' });
   }
   if (a.gap_vs_official && a.gap_vs_official > 0) {
     out.push({ cls: 'norm', text:

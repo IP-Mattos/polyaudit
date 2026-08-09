@@ -281,6 +281,13 @@ def verdict(a):
         out.append("Sin el rebate el resultado es mas chico que el residuo de "
                    "reconciliacion: signo INDETERMINADO. El rebate domina el "
                    "ingreso; el trading no demuestra ventaja.")
+    elif signo == "POSITIVO" and (a.get("rebates") or 0) > 0 \
+            and (a.get("PNL_REAL") or 0) > 0 \
+            and a["rebates"] > 0.5 * a["PNL_REAL"]:
+        out.append(f"El rebate es la fuente dominante del ingreso "
+                   f"({100 * a['rebates'] / a['PNL_REAL']:.0f}% del neto): el "
+                   "trading suma poco y la economia del wallet no se replica "
+                   "sin ese tier.")
     if a.get("diferencia_vs_oficial") and a["diferencia_vs_oficial"] > 0:
         out.append(f"El perfil publico exagera en ${a['diferencia_vs_oficial']:,.0f} "
                    "(no descuenta el fee).")
