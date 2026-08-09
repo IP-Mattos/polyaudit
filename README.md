@@ -29,11 +29,15 @@ $ python audit.py 0xf418d3a1a941292f9c8707d62a14980c5beb95a3
 That wallet advertises its bot for sale at $8,000.
 
 That report is the 2026-05-07 → 08-03 window, measured with a $19 reconciliation
-residual. A re-run six days later (`examples/takerner_2026-08-09.json`) put the
-without-rebate result at ≈+$4.2k — a sign flip that sits inside that run's own
-$2.6k residual. An audit is a dated photograph, not a permanent truth: the
-stable finding across both windows is a trading result of roughly zero with the
-rebate at ~88% of net income.
+residual. A re-run six days later (`examples/takerner_2026-08-09.json`, $2.6k
+residual, 213 zero-valued redemptions) put the without-rebate result at ≈+$4.2k;
+the identity's other estimator, official − fees, gives ≈+$1.7k. Slightly
+positive by both — and tiny against $4.28M bought and $114k of fees: a sign
+flip in six days is variance around zero, not an edge appearing. An audit is a
+dated photograph, not a permanent truth: the stable finding across both windows
+is a trading result of roughly zero with the rebate as the dominant income
+source — larger than the entire net result in the first window, ~88% of it in
+the second.
 
 ## What the leaderboard does not tell you
 
@@ -89,9 +93,10 @@ One thing the identity cannot check, by construction: the rebate line. Because
 `real_pnl` already contains rebates, they cancel out of `real + fees − rebates`;
 the guard tests the reconstruction of cash flows, open value and fees against
 the venue's figure — not the rebate amount. Rebates are not inferred, though:
-they are read from explicitly labeled events (`TAKER_REBATE`, `MAKER_REBATE`),
-and for the exhibit wallet they match an independent on-chain reconstruction
-from Polygon transfer events to within 0.1%.
+they are read from explicitly labeled events (`TAKER_REBATE`, `MAKER_REBATE`).
+For the exhibit wallet they matched a third party's on-chain reconstruction
+from Polygon transfer events (≈0.1% agreement), reported during an external
+review — a corroboration this repository does not itself reproduce.
 
 ## Usage
 

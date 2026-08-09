@@ -301,6 +301,19 @@ async function runAudit(addr, maxEvents, signal, onProgress) {
     reconciled = gapPct <= 0.05;
   }
 
+  // The sign of the without-rebate result is only resolved when the effect is
+  // larger than the run's own reconciliation residual — a derived number the
+  // same size as the books' error bar has no sign.
+  const withoutRebate = realPnl - c.rebateTotal;
+  const residUsd = (official !== null && Math.abs(official) > 1)
+    ? Math.abs(expectedOfficial - official) : null;
+  let withoutRebateSign = null;
+  if (c.rebateTotal > 0) {
+    if (residUsd === null) withoutRebateSign = 'UNCHECKED';
+    else if (Math.abs(withoutRebate) <= residUsd) withoutRebateSign = 'UNRESOLVED';
+    else withoutRebateSign = withoutRebate > 0 ? 'POSITIVE' : 'NEGATIVE';
+  }
+
   const ts = acts.map(tsOf).filter((t) => t > 0);
 
   return {
@@ -335,6 +348,8 @@ async function runAudit(addr, maxEvents, signal, onProgress) {
     half_2: round2(h2),
     days_traded: days.length,
     positive_days: posDays,
+    trading_without_rebate: round2(withoutRebate),
+    without_rebate_sign: withoutRebateSign,
     lives_on_rebate: c.rebateTotal > 0 && (realPnl - c.rebateTotal) <= 0,
     requests_made: stats.requests,
   };
@@ -363,10 +378,15 @@ function verdict(a) {
       'History truncated by the event cap: the result covers only the most ' +
       'recent period, not the whole life of the wallet.' });
   }
-  if (a.lives_on_rebate) {
+  if (a.without_rebate_sign === 'NEGATIVE') {
     out.push({ cls: 'flag', text:
       'TRADING LOSES — the profit comes from the volume rebate. ' +
       'Copying these trades without that tier is losing.' });
+  } else if (a.without_rebate_sign === 'UNRESOLVED') {
+    out.push({ cls: 'warn', text:
+      'Without the rebate the result is smaller than this run’s ' +
+      'reconciliation residual: sign UNRESOLVED. The rebate dominates the ' +
+      'income; the trading shows no demonstrated edge.' });
   }
   if (a.gap_vs_official && a.gap_vs_official > 0) {
     out.push({ cls: 'norm', text:

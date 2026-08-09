@@ -215,6 +215,21 @@ def audit(addr, progress=False):
         gap_pct = abs(expected_official - official) / max(abs(official), 1.0)
         reconciled = gap_pct <= 0.05
 
+    # The sign of the without-rebate result is only resolved when the effect is
+    # larger than the run's own reconciliation residual — a derived number the
+    # same size as the books' error bar has no sign.
+    without_rebate = real_pnl - rebate_total
+    resid_usd = (abs(expected_official - official)
+                 if official is not None and abs(official) > 1 else None)
+    if rebate_total <= 0:
+        sin_rebate_signo = None
+    elif resid_usd is None:
+        sin_rebate_signo = "SIN_CONTRASTE"
+    elif abs(without_rebate) <= resid_usd:
+        sin_rebate_signo = "INDETERMINADO"
+    else:
+        sin_rebate_signo = "POSITIVO" if without_rebate > 0 else "NEGATIVO"
+
     ts = [int(a.get("timestamp") or 0) for a in acts if a.get("timestamp")]
     return {
         "address": addr,
@@ -239,6 +254,8 @@ def audit(addr, progress=False):
         "top5_pct_de_ganancias": round(100 * top5 / sum(gains), 1) if gains else None,
         "mitad_1": round(h1, 2), "mitad_2": round(h2, 2),
         "dias_operados": len(days), "dias_positivos": pos_days,
+        "trading_sin_rebate": round(without_rebate, 2),
+        "signo_sin_rebate": sin_rebate_signo,
         "vive_del_rebate": bool(rebate_total > 0 and (real_pnl - rebate_total) <= 0),
     }
 
@@ -256,9 +273,14 @@ def verdict(a):
     if not a.get("historial_completo"):
         out.append("Historial truncado por tamano: el resultado cubre solo el "
                    "periodo mas reciente, no toda su vida.")
-    if a.get("vive_del_rebate"):
+    signo = a.get("signo_sin_rebate")
+    if signo == "NEGATIVO":
         out.append("SU TRADING PIERDE — la ganancia sale del rebate por volumen. "
                    "Copiar sus trades sin ese tier es perder.")
+    elif signo == "INDETERMINADO":
+        out.append("Sin el rebate el resultado es mas chico que el residuo de "
+                   "reconciliacion: signo INDETERMINADO. El rebate domina el "
+                   "ingreso; el trading no demuestra ventaja.")
     if a.get("diferencia_vs_oficial") and a["diferencia_vs_oficial"] > 0:
         out.append(f"El perfil publico exagera en ${a['diferencia_vs_oficial']:,.0f} "
                    "(no descuenta el fee).")
