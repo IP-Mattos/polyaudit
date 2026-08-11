@@ -1,11 +1,18 @@
 # Sampling frame — every wallet this project attempted to audit
 
-**Count note (19 → 9/8 → 4):** the early rebate-focused pass is recorded
-as **8 wallets** in the session log while an earlier version of the
-README said "nine". The discrepancy is an early-era record-keeping gap,
-flagged here rather than resolved by picking the convenient number. The
-headline figure is therefore stated as "4 of the early pass (8 per the
-session log)".
+**Count note (the 8-vs-9 discrepancy, and why it is not cleanly
+resolvable):** the July audits ran as overlapping batches — a solo
+takerner audit, three pair-audits, and an 8-wallet batch on Aug 1
+("all reconciled" per the session log, "4 of 8 live on the rebate") —
+whose exact rosters were later distilled into a single summary table.
+The session-level records that could disambiguate whether the early
+README's "nine" meant the 8-wallet batch plus the earlier solo takerner
+audit, or a different composition, were compacted. Rather than picking
+the convenient number, the defensible statement is wallet-level: **the
+rebate-dependent cases are named individually** (takerner at its Aug-3
+cutoff, doggystyie, Agile-Spacing, 0x0cb038), each with its own
+evidence. The denominator ambiguity affects the rate; it does not touch
+the named cases, and the rate is context, not the finding.
 
 Population: **wallets publicly promoted as profitable** — leaderboard-cited,
 quoted in threads with significant reach, or attached to a bot or signal
@@ -42,6 +49,12 @@ in the session records; summary preserved in the project log)
 | 14 | bobbybrant (0x9028...) | in-play soccer winner | incomplete |
 | 15 | aibird | tape candidate | incomplete |
 | 16 | nihiiism (0x5c46...) | 13-month track | incomplete (1.3GB history fetched, report never delivered) |
+| 17 | 0x1b20a0 (0x1b20a00709...) | MLB pregame accumulation whale | audited, verdict delivered; gap figure not preserved in the distilled record |
+| 18 | 0x0cb038 | BTC-5m rebate bot | audited, verdict delivered; gap figure not preserved in the distilled record |
+
+Rows 17-18 were omitted from the first revision of this file and restored
+from the session memory on 2026-08-11 — an omission a careful reader
+would have found, so it is stated here rather than silently patched.
 
 ## August 2026 pass (run 2026-08-10/11; full JSON outputs in this repo's
 history and the project scratchpad)

@@ -174,11 +174,14 @@ Inclusion criteria, fixed before any wallet was run: publicly identified as
 successful in a source dated before the audit; address resolvable from that
 source, not from outcome screening; history long enough to split in halves.
 
-The tally to date: **20 full-audit runs over 19 distinct wallets.
-13 runs reconciled within the 5% guard. 4 refused as NO CONFIABLE.
-3 attempted but never delivered a verdict.** The full list — every wallet,
-its promoting source, its status and its gap — is in
-[`research/frame.md`](research/frame.md).
+The tally to date: **22 full-audit runs over 21 distinct wallets.
+13 runs reconciled within the 5% guard with preserved gap figures; 2 more
+delivered verdicts whose gap figures were not preserved in the early
+record. 4 refused as NO CONFIABLE. 3 attempted but never delivered a
+verdict.** The full list — every wallet, its promoting source, its status
+and its gap — is in [`research/frame.md`](research/frame.md), including
+the batch-structure note explaining the one denominator ambiguity the
+early record cannot resolve.
 
 The refused wallets are censored, not discarded — and we measured what can
 be measured about them without reconciliation (maker share from the
