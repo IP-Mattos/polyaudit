@@ -162,6 +162,36 @@ Of nine wallets audited this way — several of them cited in threads with
 hundreds of thousands of views — four were losing money on their trades and
 surviving on rebates. One of them sells its bot for $8,000.
 
+## Sampling frame
+
+The population is not "Polymarket traders". It is **wallets publicly
+promoted as profitable** — leaderboard-cited, quoted in threads with
+significant reach, or attached to a bot or signal service for sale. That is
+the population that matters to someone asking "can I copy this trader", and
+it is deliberately not a random sample of the venue.
+
+Inclusion criteria, fixed before any wallet was run: publicly identified as
+successful in a source dated before the audit; address resolvable from that
+source, not from outcome screening; history long enough to split in halves.
+
+The tally to date: **20 full-audit runs over 19 distinct wallets.
+13 runs reconciled within the 5% guard. 4 refused as NO CONFIABLE.
+3 attempted but never delivered a verdict.** The full list — every wallet,
+its promoting source, its status and its gap — is in
+[`research/frame.md`](research/frame.md).
+
+The refused wallets are censored, not discarded — and the censoring is not
+random in a way that matters: the failure mode (zero-valued redemptions)
+concentrates in redemption-heavy styles, precisely the styles where volume
+subsidies matter most. Size alone does not censor: the largest wallet ever
+reconciled had 2.29M events. The "four of nine live on rebates" figure from
+the early pass should therefore be read as closer to a floor than a
+ceiling — an inference about censoring direction, stated as such in
+`research/frame.md`.
+
+From 2026-08-11 onward, inclusion criteria for new audit batches are
+committed to this repository before the batch runs.
+
 ## License
 
 MIT
