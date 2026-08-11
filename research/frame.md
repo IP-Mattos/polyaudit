@@ -1,5 +1,12 @@
 # Sampling frame — every wallet this project attempted to audit
 
+**Count note (19 → 9/8 → 4):** the early rebate-focused pass is recorded
+as **8 wallets** in the session log while an earlier version of the
+README said "nine". The discrepancy is an early-era record-keeping gap,
+flagged here rather than resolved by picking the convenient number. The
+headline figure is therefore stated as "4 of the early pass (8 per the
+session log)".
+
 Population: **wallets publicly promoted as profitable** — leaderboard-cited,
 quoted in threads with significant reach, or attached to a bot or signal
 service for sale. Deliberately not a random sample of the venue: it is the
@@ -51,22 +58,34 @@ Six additional leaderboard wallets received a bounded triage
 not part of the audited sample: llamaloco0000, d7422d98, noman2026, btc333
 and two unresolved handles.
 
-## Is the censoring random? Checked, with a counterexample
+## Is the censoring random? Measured — and the measurement corrected us
 
-The failure mode is zero-valued redemptions, so the naive story is
-"bigger wallets get censored". The record does not support size alone:
-the **largest wallet ever reconciled had 2.29M events** (0x0a10 — maker
-pairs merged, near-zero redemption dependence), while a censored wallet
-had only 48,787. What the censored set shares is **style, not size**:
-all four are redemption-heavy flows (sweep/redeem or taker-redeem loops)
-— precisely the styles where volume subsidies (rebates) matter most.
+An earlier revision of this file inferred that the censoring points
+against the headline finding, making "4 of 9" a floor. **Measuring it
+refuted that inference.** The correction is preserved here and in the
+git history rather than silently harmonized.
 
-Direction of the bias, stated carefully: the guard disproportionately
-censors the styles most likely to be subsidy-dependent. If those wallets
-could be reconciled, the "trading loses without the rebate" count would
-more plausibly rise than fall. The published 4-of-9 figure from the early
-rebate pass should therefore be read as closer to a floor than a ceiling —
-but this is an inference about censoring direction, not a measurement.
+**Size does not censor**: the largest wallet ever reconciled had 2.29M
+events (0x0a10), while a censored wallet had 48,787.
+
+**Style alone does not censor either**: takerner is redemption-heavy
+($4.26M redeemed vs $20k sold) and reconciled at a 2.2% gap. What
+censors is the **magnitude of zero-valued redemptions** — 213 (passed)
+vs 921 vs 41,410 (refused).
+
+**Subsidy-dependence is measurable without reconciliation** (maker share
+from the per-fill fee; rebates from explicitly labeled events), so we
+measured it in the censored set: the sweeper (98.9% maker) earns its
+income from spread, rebates $2,468 — not subsidy-dependent; 0xf705
+(rebates $18,430 vs $98,511 fees) — not subsidy-dependent; bonereaper
+(trading ≈ −$4,778 in-window, rebates $47,713) — subsidy-dependent;
+0xee65 — unmeasured. That is **1 of 3 measurable censored wallets**
+against roughly **4 of 8 in the early reconciled pass**.
+
+Conclusion, stated at the strength the data supports: **the censoring
+shows no clear direction with respect to the rebate-dependence finding.**
+The 4-of-early-pass figure is neither a floor nor a ceiling; it is the
+measured rate among wallets whose books close, full stop.
 
 ## Pre-registration note
 

@@ -180,14 +180,16 @@ The tally to date: **20 full-audit runs over 19 distinct wallets.
 its promoting source, its status and its gap — is in
 [`research/frame.md`](research/frame.md).
 
-The refused wallets are censored, not discarded — and the censoring is not
-random in a way that matters: the failure mode (zero-valued redemptions)
-concentrates in redemption-heavy styles, precisely the styles where volume
-subsidies matter most. Size alone does not censor: the largest wallet ever
-reconciled had 2.29M events. The "four of nine live on rebates" figure from
-the early pass should therefore be read as closer to a floor than a
-ceiling — an inference about censoring direction, stated as such in
-`research/frame.md`.
+The refused wallets are censored, not discarded — and we measured what can
+be measured about them without reconciliation (maker share from the
+per-fill fee; rebates from labeled events). The result corrected our own
+earlier inference: subsidy-dependence among the measurable censored wallets
+(1 of 3) is not higher than among the early reconciled pass (~4 of 8), so
+**the censoring shows no clear direction with respect to the
+rebate-dependence finding**. Size alone does not censor (the largest
+reconciled wallet had 2.29M events); what censors is the magnitude of
+zero-valued redemptions. Full 2x2 and the preserved correction in
+[`research/frame.md`](research/frame.md).
 
 From 2026-08-11 onward, inclusion criteria for new audit batches are
 committed to this repository before the batch runs.
