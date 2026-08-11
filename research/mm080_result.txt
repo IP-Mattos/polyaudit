@@ -1,0 +1,12 @@
+velas objetivo: 576 (48h)
+  ...100 velas, fills 54
+  ...200 velas, fills 97
+  ...300 velas, fills 160
+  ...400 velas, fills 218
+  ...500 velas, fills 277
+
+velas con cinta: 576 | fills-proxy 0.72-0.80: 313
+HOLD del fill a 0.80: 74.1%  (IC95 69.0-78.7)  | breakeven ~77%
+entrada media 0.775 | mitades 78%/70%
+EV neto por trade (salvage 5c): -2.1c por share
+contexto: favorito de mitad de vela gano 70.1% de 576 velas
