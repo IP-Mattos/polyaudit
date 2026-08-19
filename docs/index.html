@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#10151a">
 <meta name="description" content="Polymarket's public leaderboard reports profit before fees and volume in shares. Forensic research on what audited wallets actually made, a graveyard of falsified strategies, and a browser-based wallet auditor.">
-<title>polyaudit — Can I copy this trader?</title>
+<title>polyaudit · Can I copy this trader?</title>
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -33,7 +33,7 @@
     <h1>Can I copy this trader?</h1>
     <p class="lede">The one question the leaderboards do not answer. Polymarket's
       public <code>pnl</code> is <strong>pre-fee</strong>, and its <code>vol</code>
-      is denominated in <strong>shares, not dollars</strong> — verified on 2.3&nbsp;million+
+      is denominated in <strong>shares, not dollars</strong>. Verified on 2.3&nbsp;million+
       activity events across 16 audited wallets. A wallet can show six figures of
       public profit, lose money on every trade, and stay alive on a volume rebate
       you will never qualify for.</p>
@@ -41,7 +41,7 @@
     <figure class="term reveal">
       <figcaption class="term-bar">
         <span>audit 0xf418d3a1a941292f9c8707d62a14980c5beb95a3</span>
-        <span>exhibit 00 — the $8,000 bot · window 2026-05-07 → 08-03</span>
+        <span>exhibit 00 · the $8,000 bot · window 2026-05-07 → 08-03</span>
       </figcaption>
       <div class="term-body">
         <div class="tl"><span class="tl-k">profile pnl (public)</span><span class="tl-v amber">+$101,914.56</span><span class="tl-n">pre-fee, pre-rebate</span></div>
@@ -51,15 +51,15 @@
         <div class="tl"><span class="tl-k">…without the rebate</span><span class="tl-v red">−$4,282.49</span><span class="tl-n">the trading itself loses</span></div>
       </div>
       <p class="term-foot">This wallet's owner sells the bot behind it for $8,000.
-        Every fill was re-priced from the raw activity feed; the arithmetic above is the whole argument.
-        An audit is a dated photograph, not a permanent truth: a
+        Every fill was re-priced from the raw activity feed, and the arithmetic above is the whole argument.
+        An audit is a dated photograph, not a permanent truth. A
         <a href="https://github.com/IP-Mattos/polyaudit/blob/master/examples/takerner_2026-08-09.json" rel="external">re-run
         six days later</a> ($2.6k reconciliation residual, 213 zero-valued redemptions) put the
-        without-rebate result at ≈+$4.2k, and the identity's other estimator — official − fees —
-        at ≈+$1.7k. Slightly positive by both, and tiny against $4.28M bought and $114k of fees:
-        a sign flip in six days is variance around zero, not an edge appearing. What holds in both
-        windows: the trading result is roughly zero, and the rebate dominates the income — larger
-        than the entire net result in the first window, ~88% of it in the second. Compare periods,
+        without-rebate result at about +$4.2k, and the identity's other estimator, official minus fees,
+        at about +$1.7k. Slightly positive by both, and tiny against $4.28M bought and $114k of fees.
+        A sign flip in six days is variance around zero, not an edge appearing. Here is what holds in both
+        windows. The trading result is roughly zero, and the rebate runs the income. It was larger
+        than the entire net result in the first window, and about 88% of it in the second. Compare periods,
         not totals.</p>
     </figure>
 
@@ -76,38 +76,38 @@
   <!-- ================= THE FEE ================= -->
   <section class="exhibit" id="fee">
     <div class="wrap">
-      <p class="ex-tag">Exhibit A — The toll</p>
+      <p class="ex-tag">Exhibit A · The toll</p>
       <h2>The fee is never a separate line</h2>
       <p>On crypto markets the taker fee is <code>0.07·p·(1−p)</code> per share,
-        and it is embedded silently in <code>usdcSize</code>: a buy of 30 shares at
+        and it is embedded silently in <code>usdcSize</code>. A buy of 30 shares at
         0.63 debits <strong>19.39, not 18.90</strong>. The 0.49 gap is the fee. On
         a wallet doing hundreds of thousands of fills, that gap dwarfs the trading
-        result. Maker fills pay <strong>zero</strong> — verified per fill on real
-        accounts, not inferred from documentation.</p>
+        result. Maker fills pay <strong>zero</strong>, which we verified per fill on real
+        accounts rather than inferring it from documentation.</p>
       <p>On the other side of the ledger sit two separate rebate programs, both
-        live and both officially documented: the
+        live and both officially documented. The
         <a href="https://docs.polymarket.com/programs/taker-rebates" rel="external">taker
-        rebate</a> — automatic daily refunds by 30-day weighted-volume tier, from
-        3% at Bronze to 50% at Obsidian — and the
+        rebate</a> pays automatic daily refunds by 30-day weighted-volume tier, from
+        3% at Bronze to 50% at Obsidian. The
         <a href="https://docs.polymarket.com/market-makers/maker-rebates" rel="external">maker
-        rebate</a>, a share of the taker-fee pool proportional to the liquidity you
+        rebate</a> is a share of the taker-fee pool, proportional to the liquidity you
         actually got filled. The activity feed labels them as distinct event types
         (<code>TAKER_REBATE</code> / <code>MAKER_REBATE</code>), and the audit
-        counts both. Fee trackers show the toll; reward pages show the refund;
-        nobody nets them into a single number. So a wallet paying $500k in fees
+        counts both. Fee trackers show the toll. Reward pages show the refund.
+        Nobody nets them into a single number. So a wallet paying $500k in fees
         while collecting $600k in rebates looks identical to one that is simply
         bleeding.</p>
 
       <div class="identity">
         official&nbsp;&nbsp;≈&nbsp;&nbsp;real&nbsp;+&nbsp;fees&nbsp;−&nbsp;rebates
         <span class="note">The reconciliation identity. The venue's public figure is
-        blind to both fees and rebates, which makes it an independent check: when an
-        audit's books do not tie out against it within 5%, events are missing and
+        blind to both fees and rebates, which makes it an independent check. When an
+        audit's books do not tie out against it within 5%, some events are missing and
         the numbers must not be published as fact.</span>
       </div>
 
-      <p>That single netted number — trading result with the subsidy removed — is
-        the difference between a business you can copy and one you cannot, because
+      <p>That single netted number, the trading result with the subsidy removed, is
+        what separates a business you can copy from one you cannot, because
         the rebate scales with volume you will never have. Of nine wallets audited
         this way early on, several of them cited in threads with hundreds of
         thousands of views, <strong>four were losing money on their trades and
@@ -118,11 +118,11 @@
   <!-- ================= THE BESTIARY ================= -->
   <section class="exhibit" id="bestiary">
     <div class="wrap">
-      <p class="ex-tag">Exhibit B — The bestiary</p>
+      <p class="ex-tag">Exhibit B · The bestiary</p>
       <h2>Six species of “winner”</h2>
       <p>Every archetype below is a real wallet, audited fill by fill from public
-        on-chain and API data. The profile number is what the leaderboard shows;
-        the rest is what actually happened.</p>
+        on-chain and API data. The profile number is what the leaderboard shows.
+        The rest is what actually happened.</p>
 
       <ul class="cards">
         <li class="card">
@@ -134,14 +134,14 @@
             <li><span>fees / rebates</span><span class="v">$106,216 / $27,782</span></li>
             <li><span>trading without the subsidy</span><span class="v red">≈ −$4,283</span></li>
           </ul>
-          <p>In the May 7 – Aug 3 window the entire profit was the volume rebate;
-            a re-run six days later showed trading itself marginally positive —
+          <p>In the May 7 to Aug 3 window the entire profit was the volume rebate.
+            A re-run six days later showed trading itself marginally positive,
             a few thousand dollars against $4.3M traded. Either way the subsidy
-            dominates the net result: copy the trades without the tier and you
+            runs the net result. Copy the trades without the tier and you
             trade a coin flip while paying full toll. Sells the bot for $8,000.</p>
-          <p class="aside">Same family: doggystyie — profile +$214.8k, net −$312 in
-            the audited window. Agile-Spacing — profile +$533k lifetime; audited at a
-            Diamond-tier rebate of ≈$3,116/day against ≈$3,446/day of fees.</p>
+          <p class="aside">Same family. doggystyie shows profile +$214.8k, net −$312 in
+            the audited window. Agile-Spacing shows profile +$533k lifetime, audited at a
+            Diamond-tier rebate of about $3,116/day against about $3,446/day of fees.</p>
         </li>
 
         <li class="card">
@@ -151,15 +151,15 @@
             <li><span>real pnl, 5 months</span><span class="v green">+$98,340</span></li>
             <li><span>lifetime fees paid</span><span class="v amber">$0.05</span></li>
             <li><span>merged YES+NO pairs</span><span class="v">7.83M × 1.43c</span></li>
-            <li><span>hit rate vs price</span><span class="v">equal — zero information</span></li>
+            <li><span>hit rate vs price</span><span class="v">equal, zero information</span></li>
           </ul>
           <p>2.2M operations, both legs quoted, pairs merged back to dollars, plus
             0.5% maker rebate. Every month green, top-5 markets only 3.5% of PnL.
-            Not copiable without 24/7 queue position — a causal simulation of a
-            small replica is negative.</p>
-          <p class="aside">Same family: mo-money — real +$210k at 93.4% maker;
+            Not copiable without 24/7 queue position. A causal simulation of a
+            small replica comes out negative.</p>
+          <p class="aside">Same family. mo-money made real +$210k at 93.4% maker, and a
             tape reconstruction of its picks shows no timing edge. The business is
-            quoting ~$100k/day of volume, not picking winners.</p>
+            quoting about $100k/day of volume, not picking winners.</p>
         </li>
 
         <li class="card">
@@ -172,8 +172,8 @@
           </ul>
           <p>+$85k in the audited month only because the month was flat. Short
             volatility looks like skill until the month that isn't.</p>
-          <p class="aside">Side find from the same book: 458 dust orders resting at
-            1–2c caught $22,686 in 1.65 days ($8.97 → $13,939 on the best fill) —
+          <p class="aside">Side find from the same book. 458 dust orders resting at
+            1–2c caught $22,686 in 1.65 days ($8.97 to $13,939 on the best fill),
             crumbs from other people's market orders.</p>
         </li>
 
@@ -186,8 +186,8 @@
             <li><span>red days</span><span class="v">5 of 11</span></li>
           </ul>
           <p>trumbit is a lifetime loser whose single good afternoon equals its
-            entire historical profit. Regime luck: measured day-to-day
-            follow-through persistence is +0.11 — the storm is only visible in the
+            entire historical profit. This is regime luck. Measured day-to-day
+            follow-through persistence is +0.11, and the storm is only visible in the
             rearview mirror.</p>
         </li>
 
@@ -195,13 +195,13 @@
           <p class="card-kind">The fee-bled signal</p>
           <p class="card-who"><span class="addr">0xb7e6…</span></p>
           <ul class="card-stats">
-            <li><span>edge per trade</span><span class="v green">+1pt — genuine</span></li>
+            <li><span>edge per trade</span><span class="v green">+1pt, genuine</span></li>
             <li><span>fee as share of gross</span><span class="v red">166%</span></li>
             <li><span>net</span><span class="v red">−$1,021</span></li>
           </ul>
-          <p>The rare wallet with a real predictive signal — and it still loses,
-            because the toll is larger than the edge. Prediction is not enough;
-            prediction net of the fee is the game.</p>
+          <p>The rare wallet with a real predictive signal, and it still loses,
+            because the toll is larger than the edge. Prediction is not enough.
+            Prediction net of the fee is the game.</p>
         </li>
 
         <li class="card">
@@ -213,32 +213,32 @@
             <li><span>zero-valued redemptions in the API</span><span class="v red">41,410</span></li>
             <li><span>reconciliation gap</span><span class="v red">922%</span></li>
           </ul>
-          <p>The audit refuses to print a number: the wallet's redemption events
+          <p>The audit refuses to print a number. The wallet's redemption events
             come back empty from the public API, so its real result cannot be
-            reconstructed from activity alone. It is 84.6% maker — the strategy
+            reconstructed from activity alone. It is 84.6% maker, so the strategy
             described in the viral thread does not match the wallet's actual
             behavior, and the thread carries referral codes.</p>
         </li>
       </ul>
 
-      <p class="lesson"><strong>The pattern across all sixteen audits:</strong>
-        every winner monetizes a <em>resource</em> — speed, volume-tier rebates,
-        capital, or 24/7 queue position. None of them predicts. The leaderboard
-        cannot tell you which is which; the fee line can.</p>
+      <p class="lesson"><strong>The pattern across all sixteen audits.</strong>
+        Every winner monetizes a <em>resource</em>, whether that is speed, a
+        volume-tier rebate, capital, or 24/7 queue position. None of them predicts.
+        The leaderboard cannot tell you which is which. The fee line can.</p>
     </div>
   </section>
 
   <!-- ================= THE GRAVEYARD ================= -->
   <section class="exhibit" id="graveyard">
     <div class="wrap">
-      <p class="ex-tag">Exhibit C — The graveyard</p>
+      <p class="ex-tag">Exhibit C · The graveyard</p>
       <h2>Strategies measured, and buried</h2>
-      <p>Roughly eleven strategy families, each taken to a pre-registered test —
-        gates written down before the data arrived, forward paper trading with
+      <p>Roughly eleven strategy families, each taken to a pre-registered test.
+        Gates written down before the data arrived, forward paper trading with
         controls, and adversarial re-audits of the instruments themselves. Total
-        real-money tuition: about <strong>$12</strong>, from one hastily armed bot.
+        real-money tuition was about <strong>$12</strong>, from one hastily armed bot.
         Everything else died on paper. The t-statistics and sample sizes are the
-        point: most of these looked spectacular right up until the instrument was
+        point. Most of these looked spectacular right up until the instrument was
         audited.</p>
 
       <div class="tscroll" role="region" aria-label="Falsified strategies" tabindex="0">
@@ -299,23 +299,23 @@
               <td class="strat">Favorite buying in 5-minute crypto (0.85–0.97)</td>
               <td><span class="stamp">Dead</span></td>
               <td class="ev">The calibration curve said +3.2–3.9c (<span class="num">22k</span> obs,
-                <span class="num">t≈28</span>) — but one-entry-per-candle shrinks the edge
-                <span class="num">5×</span>. The only strategy that touched real money:
-                <span class="num">−$12</span>.</td>
+                <span class="num">t≈28</span>), but one-entry-per-candle shrinks the edge
+                <span class="num">5×</span>. The only strategy that touched real money lost
+                <span class="num">$12</span>.</td>
             </tr>
             <tr>
               <td class="strat">Momentum core (moderate strength, mid-candle)</td>
               <td><span class="stamp">Dead</span></td>
               <td class="ev">Forward <span class="num">n&gt;1,000</span> at
-                <span class="num">t≈0.16–0.9</span> — nothing. The strongest cell was buried
+                <span class="num">t≈0.16–0.9</span>, which is nothing. The strongest cell was buried
                 at <span class="num">t=−2.58</span> (−$190 simulated).</td>
             </tr>
             <tr>
               <td class="strat">Pre-open entry (trade before the candle opens)</td>
               <td><span class="stamp artifact">Artifact</span></td>
-              <td class="ev">Looked spectacular — +15.7c, <span class="num">t=+16.95</span>, both halves
+              <td class="ev">Looked spectacular, at +15.7c, <span class="num">t=+16.95</span>, both halves
                 green, 236 wallets. A regression-discontinuity check showed no jump at the
-                exogenous candle boundary: the API timestamp is order <b>placement</b>, not
+                exogenous candle boundary. The API timestamp is order <b>placement</b>, not
                 execution.</td>
             </tr>
             <tr>
@@ -331,7 +331,7 @@
               <td class="ev">The green band was survivorship: “touch” markets close early only when
                 the touch occurs. The clean cell: <span class="num">+0.9c, t=0.35</span>. One law
                 survived: cheap crypto tails are overpriced everywhere
-                (<span class="num">−3.4 to −15.9c/share, t to −48</span>) — never buy them.</td>
+                (<span class="num">−3.4 to −15.9c/share, t to −48</span>). Never buy them.</td>
             </tr>
             <tr>
               <td class="strat">Maker one-leg deep bids</td>
@@ -344,8 +344,8 @@
             <tr>
               <td class="strat">Maker two-leg pairs (small replica of the quoting machine)</td>
               <td><span class="stamp">Dead</span></td>
-              <td class="ev">The first simulation (+$30, 89% pairs completed) contained look-ahead —
-                fills before the order existed. The causal redo completes 51–61% and nets
+              <td class="ev">The first simulation (+$30, 89% pairs completed) contained look-ahead,
+                counting fills before the order existed. The causal redo completes 51–61% and nets
                 <span class="num">−0.09/cycle (t=−13.8 to −16.2)</span>. Ask sums average 1.08;
                 you must extract &gt;8c per cycle just to break even.</td>
             </tr>
@@ -360,8 +360,8 @@
               <td class="strat">Hour-of-day filter</td>
               <td><span class="stamp gray">Inconclusive</span></td>
               <td class="ev">Follow-through of <span class="num">81.0%</span> at 16:00 UTC vs &lt;76%
-                overnight is real — but already priced (the favorite trades 0.70–0.75), and the
-                price test is underpowered: best block <span class="num">t=1.61</span>.</td>
+                overnight is real, but already priced (the favorite trades 0.70–0.75), and the
+                price test is underpowered, with best block <span class="num">t=1.61</span>.</td>
             </tr>
             <tr>
               <td class="strat">Underreaction to spot moves</td>
@@ -370,7 +370,7 @@
                 (<span class="num">n=64, t=+3.44</span>, +$1.55/trade) collapsed when the same
                 entries were re-priced at the executable ask:
                 <span class="num">t=0.27</span>, +$0.09/trade. Mean ask−print gap
-                <span class="num">+17c</span> — the “cheap leader” was a stale print, not a slow
+                <span class="num">+17c</span>. The “cheap leader” was a stale print, not a slow
                 market.</td>
             </tr>
           </tbody>
@@ -378,8 +378,8 @@
       </div>
 
       <p class="aside">Verdicts are frozen at the pre-registered gate. “Artifact”
-        means the effect was real in the instrument and absent in the world —
-        which is a finding about the instrument, and those turned out to be the
+        means the effect was real in the instrument and absent in the world.
+        That is a finding about the instrument, and those turned out to be the
         most valuable findings of all.</p>
     </div>
   </section>
@@ -387,15 +387,15 @@
   <!-- ================= THE METHOD ================= -->
   <section class="exhibit" id="method">
     <div class="wrap">
-      <p class="ex-tag">Exhibit D — The method</p>
+      <p class="ex-tag">Exhibit D · The method</p>
       <h2>How not to fool yourself</h2>
-      <p>Four canonical falsifications shaped everything here: a collector whose
-        attention was biased toward contested windows (+$420/day became
-        −$0.16/window when sampled honestly); a backtest that never charged the
-        fee and kept trading on ghost credit after going bankrupt on day three; an
-        A/B test whose control died before the treatment's good period; and a
+      <p>Four falsifications shaped everything here. A collector whose
+        attention was biased toward contested windows, where +$420/day became
+        −$0.16/window once we sampled honestly. A backtest that never charged the
+        fee and kept trading on ghost credit after going bankrupt on day three. An
+        A/B test whose control died before the treatment's good period. And a
         model labeled with the same feed that generated its signals. Each one
-        produced a rule. The rules below were all paid for.</p>
+        produced a rule, and the rules below were all paid for.</p>
 
       <ol class="rules">
         <li><b>Entry prices must be executable quotes, never prints.</b>
@@ -405,7 +405,7 @@
         <li><b>Audit the timestamp before the finding.</b>
           <span class="paid">The activity API's timestamp is order placement, not
           execution. That one field manufactured a t=16.9 “edge”.</span></li>
-        <li><b>Fill simulations must be causal — no fill before its order existed.</b>
+        <li><b>Fill simulations must be causal. No fill before its order existed.</b>
           <span class="paid">Look-ahead turned −0.09/cycle into +$30 of imaginary profit.</span></li>
         <li><b>Fee always charged, slippage measured, ruin counted.</b>
           <span class="paid">One glorious backtest ($100→$346) never paid the fee and
@@ -416,11 +416,11 @@
         <li><b>Labels must come from a channel independent of the signal feed.</b>
           <span class="paid">A fair-value model labeled by its own spot feed agreed with
           settlement only 62.5–73.2% of the time. Use the settlement winner or an
-          independent index — never the feed that fired the signal.</span></li>
+          independent index, never the feed that fired the signal.</span></li>
         <li><b>Audit the collector's attention function before believing its tape.</b>
           <span class="paid">A recorder that only kept “interesting” windows produced a
           +$420/day fantasy; unbiased sampling read −$0.16/window.</span></li>
-        <li><b>A/B tests share period, band, and machinery — or they are not A/B tests.</b>
+        <li><b>A/B tests share period, band, and machinery, or they are not A/B tests.</b>
           <span class="paid">A control that died before the treatment's good period
           proves nothing about either.</span></li>
         <li><b>Do not slice small samples into significance gates.</b>
@@ -433,7 +433,7 @@
         <li><b>When two of your own scripts disagree, neither is valid.</b>
           <span class="paid">Not until the cause of the disagreement is found and named.</span></li>
         <li><b>Every join must print its intersection size.</b>
-          <span class="paid">A silent join once dropped 24.8% of markets — exactly the
+          <span class="paid">A silent join once dropped 24.8% of markets, exactly the
           ones that had flipped, which was the entire question.</span></li>
         <li><b>Instrument resolution must exceed the effect size.</b>
           <span class="paid">You cannot measure a 3c edge with a book that is 10c stale.</span></li>
@@ -447,7 +447,7 @@
   <!-- ================= API NOTES ================= -->
   <section class="exhibit" id="api">
     <div class="wrap">
-      <p class="ex-tag">Exhibit E — For builders</p>
+      <p class="ex-tag">Exhibit E · For builders</p>
       <h2>API gotchas</h2>
       <p>Everything the auditor relies on, learned the slow way. All endpoints are
         public, keyless, and CORS-open.</p>
@@ -456,25 +456,25 @@
         <li><b><code>/activity</code> caps at ~4,000 events</b> on a naive query. Walk
           backwards with <code>&amp;end=&lt;oldest_ts&gt;</code> and dedupe on
           (transactionHash, asset, type, size, timestamp, side, usdcSize). A batch made
-          entirely of one timestamp will stall a naive cursor — step the cursor back one
+          entirely of one timestamp will stall a naive cursor, so step the cursor back one
           second and only give up after two consecutive stalls.</li>
         <li><b>Settlement truth</b> is
           <code>clob.polymarket.com/markets/{conditionId}</code> →
           <code>tokens[].winner</code>. Short-lived closed markets are not always indexed
-          elsewhere — capture the conditionId while the market is live.</li>
+          elsewhere, so capture the conditionId while the market is live.</li>
         <li><b>gamma <code>/markets</code> silently ignores <code>tag_slug</code></b>.
           It returns unfiltered results with no error. Filter through
           <code>/events</code> instead.</li>
         <li><b>Some wallets return zero-valued REDEEM events.</b> Their PnL cannot be
-          reconstructed from activity alone. Detect the case and say so — do not guess.</li>
+          reconstructed from activity alone. Detect the case and say so. Do not guess.</li>
         <li><b>The activity <code>timestamp</code> is order placement time</b>, not
           execution time. Any timing study built on it measures when people clicked,
           not when they traded.</li>
         <li><b>Leaderboard <code>pnl</code> is pre-fee and <code>vol</code> is in
           shares.</b> The two headline numbers on every profile page are not what they
           appear to be.</li>
-        <li><b>Be polite:</b> space requests ≥350ms and retry on failure with backoff.
-          A timeout must never be mistaken for the end of a history — the first version
+        <li><b>Be polite.</b> Space requests ≥350ms and retry on failure with backoff.
+          A timeout must never be mistaken for the end of a history. The first version
           of this tool swallowed one timeout and reported four days of a three-month
           wallet as if it were the whole thing.</li>
       </ul>
