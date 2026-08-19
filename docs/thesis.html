@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#10151a">
+<meta name="description" content="Every public trading number is gross. A one-line reconciliation identity — true ≈ reported − hidden costs + hidden subsidies, checked against an independent figure — separates a copyable edge from an inflated one, in any domain. Refusing to report what cannot be verified is the feature.">
+<title>Gross Numbers Lie</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-head">
+  <div class="wrap site-head-in">
+    <a class="brand" href="index.html"><span class="tick">$</span> polyaudit</a>
+    <nav class="site-nav" aria-label="Site">
+      <a href="thesis.html" aria-current="page">Thesis</a>
+      <a href="index.html">Research</a>
+      <a href="auditor.html">Auditor</a>
+      <a href="services.html">Audits</a>
+      <a href="https://github.com/IP-Mattos/polyaudit" rel="external">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="hero wrap">
+    <p class="eyebrow">The method behind the tool</p>
+    <h1>Gross numbers lie</h1>
+    <p class="lede">Every public performance number — a leaderboard PnL, a
+      backtest return, a screenshot that says <em>+512%</em> — is a
+      <strong>gross</strong> figure. It is the result before the costs that
+      are hidden from you and before the subsidies you will never receive.
+      The only number that tells you whether you can <em>copy</em> it is net
+      of both. And when that net number cannot be checked, the honest output
+      is to refuse to give one.</p>
+
+    <div class="identity">
+      true&nbsp;&nbsp;≈&nbsp;&nbsp;reported&nbsp;−&nbsp;hidden&nbsp;costs&nbsp;+&nbsp;hidden&nbsp;subsidies
+      <span class="note">Reconcile it against an independent figure. If the
+      books do not close, the events are incomplete — and the number must
+      not be published as fact.</span>
+    </div>
+  </section>
+
+  <section class="exhibit">
+    <div class="wrap">
+      <p class="ex-tag">The claim</p>
+      <h2>Copyable is not the same as profitable</h2>
+      <p>The question a follower actually asks is not “how much did they
+        make.” It is “can I reproduce this with what I have.” Those are
+        different questions, and the gap between them is exactly the two
+        terms a gross number omits:</p>
+      <p><strong>Hidden costs</strong> are what the reported figure already
+        spent but did not subtract — a fee embedded inside the trade size, a
+        spread paid on the way out, the slippage a backtest fills through as
+        if it were free. You pay these whether or not anyone shows them to
+        you.</p>
+      <p><strong>Hidden subsidies</strong> are the income that arrived from
+        being a <em>resource</em> rather than from being right — a
+        volume-tier rebate, a maker reward, the exchange’s loyalty program,
+        or simply the market rising under every position in a bull run. This
+        income scales with capital, speed, queue position, or beta you do
+        not have. Copy the trades without the resource and you inherit the
+        costs but not the subsidy.</p>
+      <p>Net both terms into one figure and a familiar illusion collapses: a
+        wallet with six figures of public profit whose trading loses money,
+        kept alive by a rebate; a bot whose “512% backtest” is the single
+        best run of a parameter sweep; a stock rule whose edge is half the
+        market tide. Same arithmetic, three costumes.</p>
+    </div>
+  </section>
+
+  <section class="exhibit">
+    <div class="wrap">
+      <p class="ex-tag">The generalization</p>
+      <h2>One identity, four domains</h2>
+      <p>The identity is not about prediction markets. It is about any place
+        a public number is shown without its full cost and subsidy
+        structure. Each row below is a measurement, not an assertion — the
+        method and data are in the <a href="https://github.com/IP-Mattos/polyaudit" rel="external">repository</a>.</p>
+
+      <div class="table-scroll">
+        <table class="grid">
+          <thead>
+            <tr><th>Domain</th><th>The gross number</th><th>What it hides</th><th>What the net reveals</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Polymarket leaderboard</td>
+              <td>“+$100k profit”</td>
+              <td>fee embedded in trade size; rebate reported on a separate page</td>
+              <td>trading near zero; income dominated by a subsidy that scales with volume you will not have</td>
+            </tr>
+            <tr>
+              <td>Trading-bot backtest</td>
+              <td>“+512% return”</td>
+              <td>parameter optimization, look-ahead, in-sample fit, zero fees</td>
+              <td>the maximum of a grid search; the same idea prints 98% to 512% depending only on the knobs — a curve fit, not an edge</td>
+            </tr>
+            <tr>
+              <td>Equity “it always runs”</td>
+              <td>“+5.5% after the jump”</td>
+              <td>market beta — the tide lifting every position</td>
+              <td>about half survives as excess over the benchmark; the rest was the market, not the signal</td>
+            </tr>
+            <tr>
+              <td>Any “I made $X”</td>
+              <td>the headline return</td>
+              <td>the resource — capital, speed, queue position, tier</td>
+              <td>not reproducible at your scale, because the return was rent on a resource, not a repeatable decision</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="fig-note">Figures are drawn from this project’s own audits and
+        pre-registered measurements. The equity and backtest rows are
+        deliberately rounded; the exact runs, with their caveats
+        (survivorship, event clustering, single regime), are in the
+        research.</p>
+    </div>
+  </section>
+
+  <section class="exhibit">
+    <div class="wrap">
+      <p class="ex-tag">The feature nobody sells</p>
+      <h2>Refusing is the product</h2>
+      <p>A dashboard whose business is engagement will always hand you a
+        number, because a number keeps you looking. That is precisely why
+        its number cannot be trusted at the edges: when the underlying events
+        are incomplete — redemptions that return empty from the API, a
+        history truncated by size — the honest reconstruction is impossible,
+        and the honest output is to say so.</p>
+      <p>This is the one line the incentives of a growth product forbid:
+        <strong>NOT RELIABLE — the books do not close; do not publish these
+        numbers.</strong> An auditor earns trust by being willing to return
+        nothing. A funnel cannot afford to. That asymmetry is not a
+        limitation of the method; it is the whole of it.</p>
+    </div>
+  </section>
+
+  <section class="exhibit">
+    <div class="wrap">
+      <p class="ex-tag">Reproduce it</p>
+      <h2>Do not trust this page</h2>
+      <p>Nothing here asks for belief. The reconciliation identity is
+        arithmetic; the tool is a single standard-library script, or it runs
+        <a href="auditor.html">entirely in your browser</a>; every wallet
+        this project attempted is listed with its verdict, including the
+        refusals and the two audits it initially left out of its own table.
+        Corrections live in the git history rather than being rewritten — two
+        of them are retractions of the author’s own published inferences,
+        kept because a method that cannot be caught being wrong cannot be
+        trusted being right.</p>
+      <p>Run it on a wallet you already have an opinion about. If the number
+        it returns disagrees with the leaderboard, the identity above tells
+        you exactly where the gap went.</p>
+      <p class="case-links">
+        <a href="auditor.html">audit a wallet →</a>
+        <a href="index.html">the research →</a>
+        <a href="services.html">commission an audit →</a>
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <p class="disclaimer">This is a method for reading what happened, not a
+      prediction and not financial advice. Its numbers are reconstructions
+      from public data; where they cannot be reconciled, the correct output
+      is to refuse.</p>
+    <nav aria-label="Footer">
+      <a href="thesis.html">Thesis</a>
+      <a href="index.html">Research</a>
+      <a href="auditor.html">Auditor</a>
+      <a href="services.html">Audits</a>
+      <a href="https://github.com/IP-Mattos/polyaudit" rel="external">GitHub</a>
+      <span>MIT License</span>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

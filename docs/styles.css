@@ -519,3 +519,31 @@ td .num { font-family: var(--mono); font-size: 0.95em; color: var(--amber); }
   .rules li { padding-left: 0; padding-top: 40px; }
   .rules li::before { top: 10px; }
 }
+
+/* ---------- thesis: generalization table + notes ---------- */
+.table-scroll { overflow-x: auto; margin: 22px 0; -webkit-overflow-scrolling: touch; }
+.grid {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 640px;
+  font: 14px/1.5 var(--sans);
+}
+.grid th, .grid td {
+  text-align: left;
+  vertical-align: top;
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.grid thead th {
+  color: var(--amber);
+  font: 600 12px/1.4 var(--mono);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid var(--rule);
+}
+.grid td:first-child { color: var(--paper); font-weight: 600; white-space: nowrap; }
+.grid td:nth-child(2) { color: var(--amber); font-family: var(--mono); }
+.grid tbody tr:last-child td { border-bottom: none; }
+.fig-note { color: var(--slate); font-size: 13px; margin-top: 6px; }
+.case-links { display: flex; flex-wrap: wrap; gap: 20px; margin-top: 24px; font-family: var(--mono); }
+@media (max-width: 620px) { .grid td:first-child { white-space: normal; } }
