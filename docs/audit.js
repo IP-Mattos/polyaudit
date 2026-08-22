@@ -318,6 +318,7 @@ async function runAudit(addr, maxEvents, signal, onProgress) {
 
   return {
     address: addr,
+    run_at: new Date().toISOString().slice(0, 10),
     complete_history: complete,
     partial_run: partial,
     reconciled: reconciled,
@@ -442,11 +443,16 @@ if (form) {
   const reportBody = $('reportBody');
   const downloadBtn = $('downloadBtn');
   const exampleLink = $('exampleLink');
+  const copyLinkBtn = $('copyLinkBtn');
+  const linkFallback = $('linkFallback');
 
   let controller = null;
   let lastResult = null;
 
   const ADDR_RE = /^0x[0-9a-fA-F]{40}$/;
+  const ADDR_ERR =
+    'That is not a wallet address. Expected 0x followed by 40 hex characters.';
+  const CAPS = new Set([...capSelect.options].map((o) => o.value));
 
   const fmtInt = (n) => Number(n).toLocaleString('en-US');
   function fmtUSD(n) {
@@ -489,9 +495,10 @@ if (form) {
   function renderReport(a) {
     reportBody.replaceChildren();
     reportTitle.textContent = `audit ${a.address.slice(0, 10)}…${a.address.slice(-4)}`;
-    reportMeta.textContent = a.partial_run
+    const shape = a.partial_run
       ? 'PARTIAL — cancelled mid-walk'
       : (a.complete_history ? 'full history' : 'capped history');
+    reportMeta.textContent = a.run_at ? `${shape} · run ${a.run_at}` : shape;
 
     const add = (t, c) => reportBody.appendChild(line(t, c));
 
@@ -529,11 +536,18 @@ if (form) {
     reportEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
+  function syncUrl(addr, cap) {
+    const url = new URL(window.location.href);
+    url.searchParams.set('w', addr);
+    url.searchParams.set('cap', String(cap));
+    history.replaceState(null, '', url);
+  }
+
   async function run() {
     clearError();
     const addr = addrInput.value.trim();
     if (!ADDR_RE.test(addr)) {
-      showError('That is not a wallet address. Expected 0x followed by 40 hex characters.');
+      showError(ADDR_ERR);
       addrInput.focus();
       return;
     }
@@ -557,6 +571,7 @@ if (form) {
       } else {
         lastResult = result;
         renderReport(result);
+        syncUrl(result.address, cap);
       }
     } catch (ex) {
       if (isAbort(ex)) {
@@ -602,4 +617,35 @@ if (form) {
     link.remove();
     URL.revokeObjectURL(url);
   });
+
+  copyLinkBtn.addEventListener('click', async () => {
+    if (!lastResult) return;
+    const href = window.location.href;
+    try {
+      if (!navigator.clipboard) throw new Error('clipboard unavailable');
+      await navigator.clipboard.writeText(href);
+      linkFallback.hidden = true;
+      const prev = copyLinkBtn.textContent;
+      copyLinkBtn.textContent = 'Copied';
+      setTimeout(() => { copyLinkBtn.textContent = prev; }, 1600);
+    } catch {
+      linkFallback.value = href;
+      linkFallback.hidden = false;
+      linkFallback.focus();
+      linkFallback.select();
+    }
+  });
+
+  // A link carries the address and the cap, never the figures. The numbers are
+  // recomputed here, so a shared audit cannot be handed out pre-cooked.
+  (function bootFromUrl() {
+    const params = new URLSearchParams(location.search);
+    const w = (params.get('w') || '').trim();
+    if (!w) return;
+    addrInput.value = w;
+    const cap = params.get('cap');
+    if (cap && CAPS.has(cap)) capSelect.value = cap;
+    if (!ADDR_RE.test(w)) { showError(ADDR_ERR); return; }
+    run();
+  })();
 }

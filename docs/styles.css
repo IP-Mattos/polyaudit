@@ -506,6 +506,14 @@ td .num { font-family: var(--mono); font-size: 0.95em; color: var(--amber); }
   border-top: 1px solid var(--rule-soft);
 }
 
+.link-fallback {
+  flex: 1 1 300px; min-width: 0;
+  font-family: var(--mono); font-size: 0.82rem;
+  color: var(--paper); background: var(--panel-2);
+  border: 1px solid var(--rule); border-radius: 3px;
+  padding: 6px 9px;
+}
+
 /* ---------- responsive ---------- */
 
 @media (max-width: 760px) {
