@@ -328,8 +328,9 @@ def main():
     print(f"\n  fee pagado ${a['fee_pagado']:,.2f} | rebates ${a['rebates']:,.2f} | "
           f"maker {a['pct_maker']}% de los fills")
     print(f"  top-5 mercados = {a['top5_pct_de_ganancias']}% de las ganancias | "
-          f"mitades {a['mitad_1']:+,.0f} / {a['mitad_2']:+,.0f} | "
+          f"mitades de caja {a['mitad_1']:+,.0f} / {a['mitad_2']:+,.0f} | "
           f"dias {a['dias_positivos']}/{a['dias_operados']} positivos")
+    print("  (las lineas de forma son flujo de caja: sin rebates ni libro abierto)")
     print("\n  LECTURA:")
     for line in verdict(a):
         print(f"   - {line}")

@@ -61,10 +61,14 @@ history and the project scratchpad)
 
 | # | Wallet | Promoted as | Events walked | Gap | Status |
 |---|--------|-------------|---------------|-----|--------|
-| 17 | takerner re-run | (same wallet, fresh window) | 234,911 | 2.2% | reconciled |
-| 18 | 0x13f0bcec | X thread "sweeper bot $35K PNL", referral link | 106,709 | 394.8% (359 zero redeems) | **censored** |
-| 19 | 0xf705fa04 | leaderboard +$1.89M | 48,787 | 40.9% (921 zero redeems) | **censored** |
-| 20 | bonereaper (0xeebd...) | leaderboard +$1.24M | 600,351 (cap hit, last 18 days only) | 95.6% | **censored** (truncation + zero redeems) |
+| 19 | takerner re-run | (same wallet as #1, fresh window) | 234,911 | 2.2% | reconciled |
+| 20 | 0x13f0bcec | X thread "sweeper bot $35K PNL", referral link | 106,709 | 394.8% (359 zero redeems) | **censored** |
+| 21 | 0xf705fa04 | leaderboard +$1.89M | 48,787 | 40.9% (921 zero redeems) | **censored** |
+| 22 | bonereaper (0xeebd...) | leaderboard +$1.24M | 600,351 (cap hit, last 18 days only) | 95.6% | **censored** (truncation + zero redeems) |
+
+Numbering continues the July table, so these are run numbers, not wallet
+numbers: #19 is a second run of wallet #1. That is why the tally is 22 runs
+over 21 distinct wallets.
 
 Six additional leaderboard wallets received a bounded triage
 (~2,000-event fingerprint, no reconciliation attempt) on 2026-08-11 and are

@@ -519,8 +519,9 @@ if (form) {
     add(`  open portfolio ${fmtUSD(a.open_portfolio)} | bought ${fmtUSD(a.bought_usd)} | ` +
         `sold ${fmtUSD(a.sold_usd)} | redeemed ${fmtUSD(a.redeemed_usd)}`, 'dim');
     add(`  top-5 markets = ${a.top5_pct_of_gains !== null ? a.top5_pct_of_gains + '%' : 'n/a'} of gains | ` +
-        `halves ${fmtSigned(a.half_1)} / ${fmtSigned(a.half_2)} | ` +
+        `cash halves ${fmtSigned(a.half_1)} / ${fmtSigned(a.half_2)} | ` +
         `days ${a.positive_days}/${a.days_traded} positive`, 'dim');
+    add('  (shape lines are cash flow: no rebates, no open book)', 'dim');
     if (a.gap_vs_identity_pct !== null) {
       add(`  reconciliation: gap ${a.gap_vs_identity_pct}% vs identity ` +
           `official ≈ real + fees − rebates`,

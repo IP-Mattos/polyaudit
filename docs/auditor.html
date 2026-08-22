@@ -48,8 +48,8 @@
           <label for="cap">Max events</label>
           <select id="cap" name="cap">
             <option value="50000">50k, quick look</option>
-            <option value="200000" selected>200k, default</option>
-            <option value="600000">600k, full engine cap</option>
+            <option value="200000">200k, partial on large wallets</option>
+            <option value="600000" selected>600k, full engine cap</option>
           </select>
         </div>
         <button type="submit" class="btn" id="runBtn">Run audit</button>
@@ -89,7 +89,10 @@
       respect for a public API. Everything runs in your browser. No server, no
       account, no API key, and every request is a plain GET to Polymarket's
       public endpoints. If you cancel, it reports the partial period honestly
-      and flags it as partial.
+      and flags it as partial. The walk stops at 600,000 events, the same
+      ceiling as the command-line tool: a wallet with more history than that
+      cannot be completed by either, and the report says so rather than
+      implying totality.
     </p>
   </section>
 </main>

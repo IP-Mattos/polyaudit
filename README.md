@@ -142,6 +142,12 @@ wallet (200k+ events) takes several minutes at the built-in request spacing.
   in a single bucket. The API distinguishes more types (`TAKER_REBATE`,
   `MAKER_REBATE`, `REWARD`, `REFERRAL_REWARD`…); the bucket answers "does the
   trading pay without subsidies", not "which subsidy".
+- The walk stops at 600,000 events in both the CLI and the browser tool. A
+  wallet with more history than that cannot be completed by either; the report
+  flags the period as partial rather than implying totality.
+- Only `examples/` holds committed, re-runnable JSON. The per-wallet figures in
+  `research/` and on the research page come from session records, and where a
+  gap figure was not preserved, `research/frame.md` says so for that wallet.
 - This measures what happened. It does not predict, and it is not advice.
 
 ## What is already covered elsewhere, and what is not
@@ -158,9 +164,13 @@ you cannot, because the rebate scales with volume you will never have. This
 tool reports it, states when the trading result is negative without the
 subsidy, and refuses to answer when the underlying data cannot support one.
 
-Of nine wallets audited this way — several of them cited in threads with
-hundreds of thousands of views — four were losing money on their trades and
-surviving on rebates. One of them sells its bot for $8,000.
+In the early pass, four wallets were losing money on their trades and
+surviving on rebates: takerner at its Aug-3 cutoff, doggystyie, Agile-Spacing
+and 0x0cb038 — several of them cited in threads with hundreds of thousands of
+views, and one of them selling its bot for $8,000. The denominator of that
+early pass is not cleanly resolvable from the record (see the count note in
+[`research/frame.md`](research/frame.md)), so the named cases are the finding
+and the rate is context, not a result.
 
 ## Sampling frame
 
