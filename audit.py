@@ -207,6 +207,10 @@ def audit(addr, progress=False):
     # which gives a real identity to test:  official ≈ real + fees − rebates.
     # A wide gap means events are missing (zero-valued redeems, unhandled
     # transfer types) and the numbers must not be published as fact.
+    # What it cannot test, by construction, is the rebate line: real_pnl already
+    # contains rebates, so they cancel out of real + fees - rebates. An outside
+    # reviewer had to point that out. The identity checks cash flow, open value
+    # and fees against the venue. It never checks the subsidy.
     expected_official = real_pnl + fees - rebate_total
     reconciled = None
     gap_pct = None
@@ -214,9 +218,15 @@ def audit(addr, progress=False):
         gap_pct = abs(expected_official - official) / max(abs(official), 1.0)
         reconciled = gap_pct <= 0.05
 
-    # The sign of the without-rebate result is only resolved when the effect is
-    # larger than the run's own reconciliation residual. A derived number the
-    # same size as the books' error bar has no sign.
+    # A derived number the same size as the books' own error bar has no sign,
+    # so the effect is compared against the run's reconciliation residual before
+    # anything is claimed about it. This lives in code because prose was not
+    # enough: the same rule was published as prose on 2026-08-09 and broken that
+    # same day by the person who wrote it, who called $4,218 of effect "inside"
+    # a $2,567 residual. It is not inside. It is resolved, and positive, and the
+    # identity's other estimator agrees by construction: official - fees comes
+    # to $1,651, which is 4,218 - 2,567 exactly. The first run of this coded
+    # version contradicted the site copy shipped that morning.
     without_rebate = real_pnl - rebate_total
     resid_usd = (abs(expected_official - official)
                  if official is not None and abs(official) > 1 else None)
