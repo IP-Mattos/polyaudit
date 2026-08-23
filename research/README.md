@@ -2,9 +2,19 @@
 
 A list of dead strategies is worth nothing without the instrument that killed
 them. These are the actual measurement scripts, one per claim, each printing
-the numbers quoted on the site. Standard library plus public APIs — no keys,
-no account, no data files to download. Run any of them and argue with the
-output, not with us.
+the numbers quoted on the site. Run any of them and argue with the output, not
+with us.
+
+They come in two kinds. The first answers its question from public endpoints
+alone and runs today on a bare machine. The second is an instrument from the
+live desk that reads a tape we captured ourselves, which this repository does
+not ship. Both are here, because a verdict you cannot inspect is only an
+assertion.
+
+## Self-contained: run them today
+
+Standard library plus public APIs. No keys, no account, no data files to
+download.
 
 Every script states its rule **in its own docstring, before the results**, and
 each one charges the fee, reports both halves of the sample, and was written
@@ -22,6 +32,30 @@ invented after seeing the data measures nothing but the data.
 | `triage.py` | Fingerprint any wallet in seconds: maker share, buy-price band, clip size, market family, buys vs redemptions | Used on leaderboard names to separate quoting businesses from directional bettors before spending minutes on a full audit |
 
 `mm080_result.txt` is the raw output of the 0.80 run, kept as it printed.
+
+## Capture first, then measure
+
+These read a tape this repository does not ship, because the tape is gigabytes
+of our own capture. Read the logic and find the bug in it, or run the collector
+for a few days and produce your own tape. Every path is an environment variable
+with a relative default, so nothing points at our machine.
+
+| script | role | the claim it serves | needs |
+|---|---|---|---|
+| `binance_fast_feed.py` | collector | — | Binance aggTrade WebSocket. Writes `data/binance_fast.jsonl` |
+| `book_fast_feed.py` | collector | — | Polymarket CLOB market WebSocket, live L2 books for the current and next 5m btc/eth up-down markets. Writes `data/book_fast.jsonl` |
+| `k4lag_study.py` | study | **Latency arbitrage is dead.** 3,236 arm-settles across four posting delays (350/500/700/1000ms), non-fills booked at zero. The decay curve of a latency edge, measured on our own tape | a `k4lag_live.jsonl` shadow log |
+| `lag_judge.py` | study | **Tweet-pace models lose to the market.** What actually happens after a bracket count crosses its ceiling or its lower floor | a `tweet_watch.jsonl` capture |
+
+Both feeds are read-only market data. Neither reads a key, neither holds a
+wallet, and neither can place an order. Check that yourself rather than taking
+it from us; it is four files.
+
+`k4lag_study.py` is worth reading even if you never run it, for one line in its
+docstring: it reports **per opportunity, not per fill**. A signal that never
+filled is booked at zero rather than dropped. Drop them instead and the same
+tape shows an edge that is not there. That is the whole difference between the
+two answers.
 
 ## The instrument worth stealing
 
