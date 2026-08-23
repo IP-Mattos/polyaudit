@@ -39,7 +39,7 @@ in the session records; summary preserved in the project log)
 | 4 | Impressive-Steak (0x06dc...) | +$495k profile | reconciled |
 | 5 | mo-money (0x32ed...) | +$198k profile | reconciled |
 | 6 | ssdfj156ssz (0xcd46...) | tape top-earner | reconciled |
-| 7 | 0x0a10 / w1 (0xd4fa2e10...) | tape top-earner, 2.29M events | reconciled (≤1%) |
+| 7 | 0x0a10 / w1 (0xd4fa2e10...) | tape top-earner, 2,218,004 fills | reconciled (≤1%) |
 | 8 | elrey (0x5ed5a529...) | tape top-earner +$37k | reconciled |
 | 9 | trumbit | tape top-earner | reconciled |
 | 10 | alpha5ii-copybestbot | "copy best bot" branding | reconciled (≤1%) |
@@ -82,8 +82,19 @@ against the headline finding, making "4 of 9" a floor. **Measuring it
 refuted that inference.** The correction is preserved here and in the
 git history rather than silently harmonized.
 
-**Size does not censor**: the largest wallet ever reconciled had 2.29M
-events (0x0a10), while a censored wallet had 48,787.
+**Size does not censor**: the largest wallet ever reconciled was 0x0a10 at
+2,218,004 fills, while a censored wallet had 48,787 events.
+
+**Note on that row, because it does not add up against the tool in this
+repository.** `audit.py` stops at 600,000 events, so it cannot walk 0x0a10 and
+could not return "reconciled" if it tried: the walk would be partial and the
+venue's lifetime figure would blow the identity open. That audit ran on
+2026-08-03, six days before this repository existed, on the earlier instrument:
+windowed pagination over `/activity` with a streaming pass, which never holds
+the history in memory and therefore needs no ceiling. The wallets in the
+2026-07-29 to 08-04 pass were measured that way. An earlier revision of this
+file also carried "2.29M events" on this row; that figure was the total across
+the three wallets audited together that day, not this one's alone.
 
 **Style alone does not censor either**: takerner is redemption-heavy
 ($4.26M redeemed vs $20k sold) and reconciled at a 2.2% gap. What

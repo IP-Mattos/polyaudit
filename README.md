@@ -46,9 +46,17 @@ the second.
 | `pnl` | profit in dollars | profit **before the trading fee**, and before rebates |
 | `vol` | volume in dollars | volume in **shares** |
 
+Neither is a reading of the label. `pnl` is what the reconciliation identity
+tests on every run. `vol` was checked separately against the summed share count
+of a full history and agreed to 0.2% over 16.1 million shares, which dollars
+would not do at any average price.
+
 The fee is never a separate line. It is embedded inside `usdcSize`: a buy of 30
 shares at 0.63 debits 19.39, not 18.90. The gap is the fee, and on a wallet
-doing hundreds of thousands of fills it dwarfs the trading result.
+doing hundreds of thousands of fills it dwarfs the trading result. The
+coefficient is per-fill and per-category: `fee / (p * (1 - p) * shares)` comes
+back 0.07 on crypto, 0.05 or 0.03 on sports, and exactly 0 on a maker fill,
+which is why the maker/taker split can be read off the fee without a fills API.
 
 ## What this measures
 
@@ -200,7 +208,7 @@ earlier inference: subsidy-dependence among the measurable censored wallets
 (1 of 3) is not higher than among the early reconciled pass (~4 of 8), so
 **the censoring shows no clear direction with respect to the
 rebate-dependence finding**. Size alone does not censor (the largest
-reconciled wallet had 2.29M events); what censors is the magnitude of
+reconciled wallet had 2,218,004 fills); what censors is the magnitude of
 zero-valued redemptions. Full 2x2 and the preserved correction in
 [`research/frame.md`](research/frame.md).
 
