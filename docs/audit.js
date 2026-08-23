@@ -1,23 +1,12 @@
-/* ============================================================
-   polyaudit — browser engine.
-   A faithful port of audit.py (Python, stdlib-only) to vanilla
-   JS. Same walk, same dedupe key, same fee math, same
-   reconciliation identity, same refusal to publish numbers
-   that do not tie out. Runs entirely client-side: every
-   request is a plain GET to Polymarket's public, CORS-open
-   endpoints. No keys, no server.
-   ============================================================ */
 'use strict';
 
 const DATA = 'https://data-api.polymarket.com';
-const REQ_GAP_MS = 350;          // audit.py: REQ_GAP_S = 0.35
-const REQ_TIMEOUT_MS = 30000;    // audit.py: timeout=30
-const REQ_TRIES = 4;             // audit.py: tries=4
-const BATCH = 500;               // audit.py: limit=500
+const REQ_GAP_MS = 350;
+const REQ_TIMEOUT_MS = 30000;
+const REQ_TRIES = 4;
+const BATCH = 500;
 
 let _lastReq = 0;
-
-/* ---------- small helpers ---------- */
 
 function isAbort(err) {
   return err && (err.name === 'AbortError' || err.code === 20);
@@ -41,7 +30,6 @@ function sleep(ms, signal) {
   });
 }
 
-// numeric coercion for a single field: float(x or 0)
 function num(v) {
   const n = Number(v);
   return Number.isFinite(n) ? n : 0;
@@ -67,8 +55,7 @@ function round2(x) { return Math.round(x * 100) / 100; }
 function round1(x) { return Math.round(x * 10) / 10; }
 function round3(x) { return Math.round(x * 1000) / 1000; }
 
-/* ---------- transport (audit.py: get) ---------- */
-/* "A transient failure must never be mistaken for the end of a history" —
+/* "A transient failure must never be mistaken for the end of a history".
    4 tries, growing backoff, 350ms gap between requests, 30s per request. */
 
 async function getJSON(url, outerSignal, tries = REQ_TRIES) {
@@ -103,7 +90,6 @@ async function getJSON(url, outerSignal, tries = REQ_TRIES) {
   throw new Error(`request failed after ${tries} attempts: ${String(lastErr).slice(0, 120)}`);
 }
 
-/* ---------- history walk (audit.py: fetch_history) ---------- */
 /* Dedupe key: (transactionHash, asset, type, size, timestamp, side, usdcSize) */
 
 function eventKey(a) {
@@ -150,7 +136,6 @@ async function fetchHistory(addr, maxEvents, signal, out, stats, onProgress) {
   return false; // ceiling hit — caller must say the period is partial
 }
 
-/* ---------- the audit (audit.py: audit) ---------- */
 
 function computeCore(acts) {
   const trades = acts.filter((a) => a.type === 'TRADE');
@@ -249,8 +234,6 @@ async function runAudit(addr, maxEvents, signal, onProgress) {
 
   const c = computeCore(acts);
 
-  // The two auxiliary lookups are quick; on a cancelled run they use their own
-  // short-lived signals so the partial report still gets its cross-check.
   const auxSignal = partial ? null : signal;
 
   let portfolio = 0;
@@ -276,7 +259,6 @@ async function runAudit(addr, maxEvents, signal, onProgress) {
     official = null;
   }
 
-  // anti-luck shape
   const vals = [...c.perMarket.values()].sort((a, b) => b - a);
   const gains = vals.filter((v) => v > 0);
   const gainsSum = gains.reduce((s, v) => s + v, 0);
@@ -288,7 +270,7 @@ async function runAudit(addr, maxEvents, signal, onProgress) {
   const posDays = days.filter((d) => c.byDay.get(d) > 0).length;
 
   // Reconciliation against an INDEPENDENT number. Comparing our ledger to our
-  // own cash flow proves nothing — both come from the same rows, so the check
+  // own cash flow proves nothing: both come from the same rows, so the check
   // could never fail. The venue's public figure is fee-blind and rebate-blind,
   // which gives a real identity to test:  official ≈ real + fees − rebates.
   // A wide gap means events are missing (zero-valued redeems, unhandled
@@ -302,7 +284,7 @@ async function runAudit(addr, maxEvents, signal, onProgress) {
   }
 
   // The sign of the without-rebate result is only resolved when the effect is
-  // larger than the run's own reconciliation residual — a derived number the
+  // larger than the run's own reconciliation residual. A derived number the
   // same size as the books' error bar has no sign.
   const withoutRebate = realPnl - c.rebateTotal;
   const residUsd = (official !== null && Math.abs(official) > 1)
@@ -355,8 +337,6 @@ async function runAudit(addr, maxEvents, signal, onProgress) {
     requests_made: stats.requests,
   };
 }
-
-/* ---------- the reading (audit.py: verdict, in English) ---------- */
 
 function verdict(a) {
   const out = [];
@@ -421,10 +401,6 @@ function verdict(a) {
   }
   return out;
 }
-
-/* ============================================================
-   page wiring
-   ============================================================ */
 
 const $ = (id) => document.getElementById(id);
 
@@ -637,8 +613,7 @@ if (form) {
     }
   });
 
-  // A link carries the address and the cap, never the figures. The numbers are
-  // recomputed here, so a shared audit cannot be handed out pre-cooked.
+  // Address and cap only. Recomputing here is what stops a forged link.
   (function bootFromUrl() {
     const params = new URLSearchParams(location.search);
     const w = (params.get('w') || '').trim();

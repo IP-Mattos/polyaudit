@@ -1,4 +1,4 @@
-"""Pre-registered Binance intraday sweep — fees in, both halves, no tuning.
+"""Pre-registered Binance intraday sweep: fees in, both halves, no tuning.
 
 Rules FIXED before seeing any result (registered in this docstring):
   R-MOM: candle t closes beyond +T% -> buy at close(t), exit close(t+1).

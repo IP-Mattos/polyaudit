@@ -1,9 +1,9 @@
-"""Take-profit + stop-loss tactics on BTC — does the SL fix the grid?
+"""Take-profit + stop-loss tactics on BTC: does the SL fix the grid?
 
 Pre-registered pairs (TP, SL): (2%,1%), (2%,2%), (5%,2%), (1%,1%).
 Rule: whenever flat, buy at 1h close; exit at the first close >= entry*(1+TP)
 or <= entry*(1-SL); fee 0.2% per round trip; re-enter immediately.
-Exits on CLOSES (no intrabar guess — conservative and unambiguous).
+Exits on CLOSES (no intrabar guess, conservative and unambiguous).
 Report: trades, win rate, realized total, final mark-to-market TOTAL,
 fees paid, vs buy&hold and vs the no-stop version.
 """

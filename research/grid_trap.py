@@ -1,9 +1,9 @@
-"""'Buy, take +X%, repeat' on BTC — the grid intuition, honestly accounted.
+"""'Buy, take +X%, repeat' on BTC: the grid intuition, honestly accounted.
 
 Rule (pre-registered): whenever flat, buy at the 1h close; sell when a
 close >= entry*(1+X); fee 0.2% per round trip. No stop (the user's version
 has none). X in {2%, 5%}. At year end the open position is marked to
-market — the bag is part of the result, not a footnote.
+market: the bag is part of the result, not a footnote.
 Report: closed clips (count, win rate, realized P&L), open-bag P&L, TOTAL,
 max drawdown, longest underwater stretch, vs buy & hold. Plus the actual
 price path (was BTC really '60-65k constantly'?).

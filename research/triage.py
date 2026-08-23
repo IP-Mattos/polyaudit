@@ -1,4 +1,4 @@
-"""Fast forensic triage of leaderboard wallets — fingerprint, not full audit.
+"""Fast forensic triage of leaderboard wallets: fingerprint, not full audit.
 
 Per wallet: official pnl + most-recent ~2,000 activity events ->
 style fingerprint: span, event mix, maker share (fee-gap test), buy price

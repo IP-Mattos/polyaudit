@@ -1,11 +1,11 @@
-"""New-listing dream vs reality — Binance USDT listings of the last year.
+"""New-listing dream vs reality: Binance USDT listings of the last year.
 
 For each pair whose FIRST daily candle is between 365 and 31 days old:
   entry   = close of listing day 1 (first executable daily close)
   DREAM   = max(high of days 2..31) / entry - 1   (sell the exact top)
   REALITY = close of day 31 / entry - 1 - 0.2% RT (what you take home)
 Also: day on which the peak occurred, and how many ever traded +20/+50/+100%.
-Universe is Binance survivors — the BEST-case new coins (DEX launches and
+Universe is Binance survivors, the BEST-case new coins (DEX launches and
 presales are strictly worse: rugs and insider dumps are not in this data).
 """
 import json

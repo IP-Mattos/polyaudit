@@ -1,5 +1,5 @@
 """User's cell, pre-registered BEFORE results: maker fill at 0.80 on the
-expensive side of BTC 5m candles — does it hold often enough to pay?
+expensive side of BTC 5m candles: does it hold often enough to pay?
 
 Universe: all btc-updown-5m candles of the last 48h (closed).
 Entry proxy: the EXPENSIVE side = outcome whose last print reached >= 0.85
@@ -10,7 +10,7 @@ Win = that side's winner flag from CLOB.
 Breakeven: entry ~0.78, salvage ~0.05 on losers -> p* ~= 0.77.
 Caveats stated: tape timestamps are placement-time (documented gotcha);
 side semantics = taker side; this proxies queue position optimistically
-(assumes our bid was at the front) — reality is WORSE, so a negative
+(assumes our bid was at the front) , reality is WORSE, so a negative
 verdict is conservative and a positive one is an upper bound.
 Report: n candles, n fills, hold rate + Wilson CI, avg entry, halves,
 plus unconditional favorite-hold in the same sample for context.

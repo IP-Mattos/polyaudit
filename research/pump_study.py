@@ -1,4 +1,4 @@
-"""Pump study — small Binance USDT pairs, pre-registered.
+"""Pump study: small Binance USDT pairs, pre-registered.
 
 Question: after a detectable pump (1h candle >= +10% / +5%), what does the
 FIRST honest entry (close of the trigger candle, fee 0.2% RT) earn at
@@ -7,7 +7,7 @@ FIRST honest entry (close of the trigger candle, fee 0.2% RT) earn at
 happen across the universe.
 
 Universe: spot USDT pairs ranked ~31-130 by 24h quote volume (small but
-tradeable), current listing only — survivorship makes results look BETTER
+tradeable), current listing only; survivorship makes results look BETTER
 than reality (delisted pumpers are gone), so a negative verdict is
 conservative. Cooldown: one event per pair per 24h.
 """

@@ -226,7 +226,7 @@ def synth_row(asset, slug, m, now):
     down_book = books.get(m["down"])
     if not up_book or not down_book or not up_book.get("init") or not down_book.get("init"):
         return None
-    # Honest freshness: never re-stamp frozen books with a live ts_ms — if
+    # Honest freshness: never re-stamp frozen books with a live ts_ms; if
     # neither side saw a WS event recently, suppress and let und rows rule.
     src_ts = min(float(up_book.get("ts") or 0.0), float(down_book.get("ts") or 0.0))
     if now - src_ts > BOOK_SRC_MAX_AGE_S:

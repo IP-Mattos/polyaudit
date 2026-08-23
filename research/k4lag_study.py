@@ -2,7 +2,7 @@
 """What is actually in the k4lag: does the latency edge survive, and at what delay?
 
 k4lag is a different animal from everything else on this desk. It is not "who is
-ahead on spot-vs-strike" — it is `binance_up_poly_lag_oracle_safe`: Binance moves
+ahead on spot-vs-strike" , it is `binance_up_poly_lag_oracle_safe`: Binance moves
 and the Polymarket book has not repriced yet. Two things follow. Using Binance is
 CORRECT here (you want the fast feed to see the move first), and it has always
 read the real CLOB book, so its numbers were never poisoned by the und_tracker

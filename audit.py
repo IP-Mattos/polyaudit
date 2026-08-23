@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Polymarket wallet audit — what a trader ACTUALLY made.
+"""Polymarket wallet audit: what a trader ACTUALLY made.
 
 Polymarket's public leaderboard reports profit BEFORE the trading fee and
 denominates volume in shares rather than dollars. Wallets that appear to have
@@ -32,8 +32,8 @@ _last = 0.0
 
 
 def get(url, tries=4):
-    """A transient failure must never be mistaken for the end of a history —
-    the first version of this swallowed one timeout and reported four days of
+    """A transient failure must never be mistaken for the end of a history.
+    The first version of this swallowed one timeout and reported four days of
     a three-month wallet as if it were the whole thing."""
     global _last
     last_err = None
@@ -62,7 +62,7 @@ def fetch_history(addr, max_events=600_000, progress=False):
 
     Two hazards this handles: a batch can be entirely events at one timestamp,
     which stalls a naive cursor, and a single request failing must retry rather
-    than end the walk. Returns (events, complete) — complete is False only when
+    than end the walk. Returns (events, complete) , complete is False only when
     the ceiling was hit, so the caller can say so instead of implying totality.
     """
     seen = set()
@@ -192,7 +192,6 @@ def audit(addr, progress=False):
     except Exception:  # noqa: BLE001
         official = None
 
-    # anti-luck shape
     vals = sorted(per_market.values(), reverse=True)
     gains = [v for v in vals if v > 0]
     top5 = sum(vals[:5])
@@ -203,7 +202,7 @@ def audit(addr, progress=False):
     pos_days = sum(1 for d in days if by_day[d] > 0)
 
     # Reconciliation against an INDEPENDENT number. Comparing our ledger to our
-    # own cash flow proves nothing — both come from the same rows, so the check
+    # own cash flow proves nothing: both come from the same rows, so the check
     # can never fail. The venue's public figure is fee-blind and rebate-blind,
     # which gives a real identity to test:  official ≈ real + fees − rebates.
     # A wide gap means events are missing (zero-valued redeems, unhandled
@@ -216,7 +215,7 @@ def audit(addr, progress=False):
         reconciled = gap_pct <= 0.05
 
     # The sign of the without-rebate result is only resolved when the effect is
-    # larger than the run's own reconciliation residual — a derived number the
+    # larger than the run's own reconciliation residual. A derived number the
     # same size as the books' error bar has no sign.
     without_rebate = real_pnl - rebate_total
     resid_usd = (abs(expected_official - official)
