@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#10151a">
-<meta name="description" content="Commissioned Polymarket wallet audits: full forensic read with fees and rebates netted, reconciliation verdict, and an honest NOT RELIABLE when the books do not close. USDC on Polygon, 24h turnaround.">
-<title>polyaudit · commissioned audits</title>
+<meta name="description" content="Deeper forensic reads on a Polymarket wallet, and how to support polyaudit. The browser auditor and the method stay free.">
+<title>polyaudit · deeper reads</title>
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -19,7 +19,6 @@
       <a href="thesis.html">Thesis</a>
       <a href="index.html">Research</a>
       <a href="auditor.html">Auditor</a>
-      <a href="services.html" aria-current="page">Audits</a>
       <a href="https://github.com/IP-Mattos/polyaudit" rel="external">GitHub</a>
     </nav>
   </div>
@@ -27,72 +26,56 @@
 
 <main id="main">
   <section class="hero wrap">
-    <p class="eyebrow">Before you copy that trader</p>
-    <h1>Commissioned wallet audits</h1>
-    <p>The free <a href="auditor.html">browser auditor</a> gives you the
-      headline numbers. A commissioned audit gives you the full forensic
-      read. Fee and rebate decomposition, maker/taker anatomy, luck shape,
-      and a reconciliation against the venue's own figure. When the books do
-      not close, you get an honest <strong>NOT RELIABLE</strong> instead of a
-      tidy wrong answer.</p>
-    <p>Every method is public in the
-      <a href="https://github.com/IP-Mattos/polyaudit" rel="external">repo</a>,
-      so you are not paying for a secret. You are paying for the work, the
-      cross-checks, and a written verdict you can hold against the record.</p>
+    <p class="eyebrow">Past the headline numbers</p>
+    <h1>Deeper reads</h1>
+    <p>The <a href="auditor.html">browser auditor</a> is free, runs entirely in
+      your own tab, and uses the same method as the command-line tool. It
+      answers the headline question: what did this wallet actually make once
+      the fee and both rebate programs are netted in.</p>
+    <p>Some wallets need more than that. Era analysis that shows when the money
+      was actually made. Style-shift detection, for a wallet that stopped being
+      the thing it used to be. A side-by-side across several addresses. A
+      cross-check against an independent on-chain reconstruction. That work is
+      done by hand, one wallet at a time, and there is no button for it.</p>
   </section>
 
   <section class="exhibit">
     <div class="wrap">
-      <p class="ex-tag">What you get</p>
-      <h2>Three tiers, one standard</h2>
-      <ul class="cards">
-        <li class="card">
-          <p class="card-kind">Single audit · $15</p>
-          <p>One wallet, full public history walked to exhaustion. You get
-            the real PnL with fees and both rebate programs netted in, the
-            maker/taker split, the concentration and halves, and the
-            reconciliation verdict. Delivered as a written report within
-            24h.</p>
-        </li>
-        <li class="card">
-          <p class="card-kind">Three wallets · $40</p>
-          <p>Compare the wallets you are thinking of copying. Same standard,
-            a side-by-side table, and one recommendation section that says
-            which economics replicate at your size and which ones need a tier
-            you do not have.</p>
-        </li>
-        <li class="card">
-          <p class="card-kind">Deep dive · $50</p>
-          <p>One wallet, everything above, plus era analysis that shows when
-            the money was actually made, style-shift detection, and
-            cross-checks against an independent on-chain reconstruction where
-            it is feasible.</p>
-        </li>
-      </ul>
-      <p>Want to see the standard first? The
-        <a href="index.html">$8,000-bot case on the research page</a> is a
-        worked example. A wallet with about $100k of public profit whose
-        trading lost money at the audit cutoff, reconciled to a $19
-        residual.</p>
+      <p class="ex-tag">If you need one</p>
+      <h2>Ask, and we work out the shape</h2>
+      <p>Write to <a href="mailto:polyaudit@gmail.com?subject=Deeper%20read%20request">polyaudit@gmail.com</a>
+        with the address and what you are trying to decide. If you would rather
+        do it in the open, an
+        <a href="https://github.com/IP-Mattos/polyaudit/issues/new?title=Deeper+read+request&amp;body=Wallet+address(es)%3A%0AWhat+you+are+trying+to+decide%3A%0APreferred+delivery+channel%3A"
+           rel="external">issue on the repository</a> works too. Wallet
+        addresses are public data, so put nothing private in an issue. Scope,
+        turnaround and cost get settled before any work starts.</p>
+      <p>Every method is public in the
+        <a href="https://github.com/IP-Mattos/polyaudit" rel="external">repo</a>,
+        so none of this is a secret you are paying to unlock. What takes the
+        time is the walk, the cross-checks, and a written verdict you can hold
+        against the record.</p>
+      <p>If a wallet cannot be reconstructed from public data, the answer is
+        <strong>NOT RELIABLE</strong> and the reason why, and that costs you
+        nothing. Refusing to certify what cannot be verified is the whole
+        point.</p>
     </div>
   </section>
 
   <section class="exhibit">
     <div class="wrap">
-      <p class="ex-tag">How to order</p>
-      <h2>Two steps, no account</h2>
-      <p><strong>1.</strong> Open an
-        <a href="https://github.com/IP-Mattos/polyaudit/issues/new?title=Wallet+audit+request&amp;body=Wallet+address(es)%3A%0ATier%3A%0APreferred+delivery+channel%3A"
-           rel="external">audit request</a> on the repository with the wallet
-        address(es) and the tier you want. Wallet addresses are public data;
-        put nothing private in the issue.</p>
-      <p><strong>2.</strong> Pay in <strong>USDC on Polygon</strong>. The
-        payment address and the delivery channel come with the order
-        confirmation, and the report follows within 24 hours.</p>
-      <p>If a wallet cannot be reconstructed from public data, the report
-        says NOT RELIABLE and explains why, and you pay half or nothing.
-        Your call. Refusing to certify what cannot be verified is the whole
-        point of the service.</p>
+      <p class="ex-tag">Support</p>
+      <h2>The auditor stays free</h2>
+      <p>It is static, with no account, no server and no tracking, and it is
+        going to stay that way. If it talked you out of copying a wallet whose
+        trading loses money, it already paid for itself. A tip is welcome and
+        changes nothing about what the tool reports.</p>
+      <p>USDC on Polygon:<br>
+        <code>0x3ed6fb0e9D6fe19Ebb59bfFA630892CF1aBdC441</code></p>
+      <p>Want to see the standard first? The
+        <a href="index.html">$8,000-bot case on the research page</a> is a
+        worked example. About $100k of public profit, trading that lost money
+        at the audit cutoff, reconciled to a $19 residual.</p>
     </div>
   </section>
 </main>
@@ -106,7 +89,6 @@
       <a href="thesis.html">Thesis</a>
       <a href="index.html">Research</a>
       <a href="auditor.html">Auditor</a>
-      <a href="services.html">Audits</a>
       <span>MIT License</span>
     </nav>
   </div>

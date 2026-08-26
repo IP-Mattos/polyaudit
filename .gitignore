@@ -3,3 +3,6 @@ __pycache__/
 *.json
 !examples/*.json
 .env
+
+# local backups taken before editing the site
+.bak_*/
