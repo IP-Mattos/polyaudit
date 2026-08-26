@@ -26,10 +26,8 @@ $ python audit.py 0xf418d3a1a941292f9c8707d62a14980c5beb95a3
    - El perfil publico exagera en $78,415 (no descuenta el fee).
 ```
 
-That wallet advertises its bot for sale at $8,000.
-
 That report is the 2026-05-07 → 08-03 window, measured with a $19 reconciliation
-residual. A re-run six days later (`examples/takerner_2026-08-09.json`, $2.6k
+residual. A re-run six days later (`examples/exhibit-00_2026-08-09.json`, $2.6k
 residual, 213 zero-valued redemptions) put the without-rebate result at ≈+$4.2k;
 the identity's other estimator, official − fees, gives ≈+$1.7k. Slightly
 positive by both — and tiny against $4.28M bought and $114k of fees: a sign
@@ -173,12 +171,12 @@ tool reports it, states when the trading result is negative without the
 subsidy, and refuses to answer when the underlying data cannot support one.
 
 In the early pass, four wallets were losing money on their trades and
-surviving on rebates: takerner at its Aug-3 cutoff, doggystyie, Agile-Spacing
-and 0x0cb038 — several of them cited in threads with hundreds of thousands of
-views, and one of them selling its bot for $8,000. The denominator of that
-early pass is not cleanly resolvable from the record (see the count note in
-[`research/frame.md`](research/frame.md)), so the named cases are the finding
-and the rate is context, not a result.
+surviving on rebates: `0xf418...` at its Aug-3 cutoff, `0x0484...`,
+`0xce25e...` and `0x0cb038...`, several of them cited in threads with hundreds
+of thousands of views. The denominator of that early pass is not cleanly
+resolvable from the record (see the count note in
+[`research/frame.md`](research/frame.md)), so the individual cases are the
+finding and the rate is context, not a result.
 
 ## Sampling frame
 
